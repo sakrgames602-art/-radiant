@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>روز لانجري | Rose Lingerie</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{--primary:#e91e63;--primary-light:#f8bbd0;--primary-dark:#c2185b;--secondary:#fce4ec;--accent:#ff80ab;--white:#fff;--off-white:#fafafa;--light-pink:#fff0f5;--text-dark:#2d2d2d;--text-medium:#555;--text-light:#888;--shadow:0 4px 20px rgba(233,30,99,0.1);--shadow-hover:0 8px 30px rgba(233,30,99,0.2);--radius:16px;--radius-sm:8px;--transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Tajawal',sans-serif;background:var(--off-white);color:var(--text-dark);overflow-x:hidden}
+html[dir="ltr"] body{font-family:'Playfair Display',serif}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--light-pink)}::-webkit-scrollbar-thumb{background:var(--primary-light);border-radius:4px}::-webkit-scrollbar-thumb:hover{background:var(--primary)}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--light-pink);transition:var(--transition)}
+.header.scrolled{box-shadow:var(--shadow)}
+.header-inner{max-width:1400px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:20px}
+.logo-text{font-size:24px;font-weight:800;color:var(--primary-dark);letter-spacing:-0.5px}
+.logo-text span{color:var(--primary);font-weight:400}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--text-medium);font-weight:500;font-size:15px;position:relative;transition:var(--transition);padding:5px 0}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--primary),var(--accent));transition:var(--transition);border-radius:2px}
+.nav-links a:hover,.nav-links a.active{color:var(--primary)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.header-actions{display:flex;align-items:center;gap:16px}
+.lang-btn{background:var(--light-pink);border:none;padding:8px 16px;border-radius:20px;color:var(--primary-dark);font-weight:600;cursor:pointer;transition:var(--transition);font-family:inherit;font-size:14px}
+.lang-btn:hover{background:var(--primary);color:white}
+.cart-btn{position:relative;background:none;border:none;font-size:22px;color:var(--text-dark);cursor:pointer;transition:var(--transition);width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:50%}
+.cart-btn:hover{background:var(--light-pink);color:var(--primary)}
+.cart-count{position:absolute;top:-2px;right:-2px;background:var(--primary);color:white;font-size:11px;font-weight:700;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;animation:pulse 2s infinite}
+.menu-btn{display:none;background:none;border:none;font-size:24px;color:var(--text-dark);cursor:pointer}
+.mobile-menu{display:none;position:fixed;top:70px;left:0;right:0;background:white;z-index:999;padding:20px;box-shadow:var(--shadow);border-radius:0 0 var(--radius) var(--radius)}
+.mobile-menu.active{display:block;animation:fadeIn 0.3s ease}
+.mobile-menu a{display:block;padding:14px 0;color:var(--text-dark);text-decoration:none;font-weight:500;border-bottom:1px solid var(--light-pink);transition:var(--transition)}
+.mobile-menu a:hover{color:var(--primary);padding-right:10px}
+.hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(135deg,var(--light-pink) 0%,var(--secondary) 50%,var(--off-white) 100%);padding:100px 24px 60px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;right:-20%;width:600px;height:600px;background:radial-gradient(circle,rgba(233,30,99,0.08) 0%,transparent 70%);border-radius:50%}
+.hero::after{content:'';position:absolute;bottom:-30%;left:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(255,128,171,0.1) 0%,transparent 70%);border-radius:50%}
+.hero-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1}
+.hero-content h1{font-size:56px;font-weight:900;line-height:1.2;margin-bottom:20px;color:var(--text-dark)}
+.hero-content h1 .highlight{background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-content p{font-size:18px;color:var(--text-medium);line-height:1.8;margin-bottom:32px;max-width:500px}
+.hero-badges{display:flex;gap:16px;margin-bottom:32px;flex-wrap:wrap}
+.badge{display:flex;align-items:center;gap:8px;background:white;padding:10px 18px;border-radius:30px;font-size:14px;font-weight:500;color:var(--text-medium);box-shadow:var(--shadow)}
+.badge i{color:var(--primary)}
+.hero-buttons{display:flex;gap:16px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;border-radius:30px;font-weight:700;font-size:16px;cursor:pointer;transition:var(--transition);text-decoration:none;border:none;font-family:inherit}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white;box-shadow:0 4px 15px rgba(233,30,99,0.3)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(233,30,99,0.4)}
+.btn-outline{background:white;color:var(--primary);border:2px solid var(--primary-light)}
+.btn-outline:hover{background:var(--primary);color:white;border-color:var(--primary)}
+.hero-image{position:relative;display:flex;justify-content:center;align-items:center}
+.hero-image-main{width:100%;max-width:500px;height:600px;background:linear-gradient(135deg,var(--primary-light),var(--accent));border-radius:var(--radius);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;box-shadow:var(--shadow-hover)}
+.hero-image-main i{font-size:120px;color:rgba(255,255,255,0.9);animation:float 3s ease-in-out infinite}
+.floating-card{position:absolute;background:white;padding:16px 20px;border-radius:var(--radius-sm);box-shadow:var(--shadow-hover);display:flex;align-items:center;gap:12px;animation:float 4s ease-in-out infinite}
+.floating-card.card-1{top:20%;left:-20px;animation-delay:0s}
+.floating-card.card-2{bottom:25%;right:-30px;animation-delay:1s}
+.floating-card-info h4{font-size:14px;font-weight:700;color:var(--text-dark)}
+.floating-card-info p{font-size:13px;color:var(--primary);font-weight:700;margin:0}
+.floating-card .stars{color:#ffc107;font-size:12px}
+.section{padding:80px 24px;max-width:1400px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:50px}
+.section-tag{display:inline-block;background:var(--light-pink);color:var(--primary);padding:6px 18px;border-radius:20px;font-size:13px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:1px}
+.section-title{font-size:40px;font-weight:900;color:var(--text-dark);margin-bottom:16px}
+.section-title span{background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.section-desc{font-size:17px;color:var(--text-medium);max-width:600px;margin:0 auto;line-height:1.7}
+.categories-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.category-card{background:white;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:var(--transition);cursor:pointer;position:relative}
+.category-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-hover)}
+.category-card-img{height:200px;background:linear-gradient(135deg,var(--light-pink),var(--secondary));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.category-card-img::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,0.1) 100%)}
+.category-card-img i{font-size:60px;color:var(--primary);opacity:0.8;transition:var(--transition)}
+.category-card:hover .category-card-img i{transform:scale(1.1)}
+.category-card-info{padding:20px;text-align:center}
+.category-card-info h3{font-size:18px;font-weight:700;color:var(--text-dark);margin-bottom:6px}
+.category-card-info p{font-size:14px;color:var(--text-light)}
+.category-count{position:absolute;top:16px;right:16px;background:white;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:700;color:var(--primary);box-shadow:var(--shadow)}
+.products-section{background:linear-gradient(180deg,var(--off-white) 0%,var(--light-pink) 100%)}
+.products-filter{display:flex;justify-content:center;gap:12px;margin-bottom:40px;flex-wrap:wrap}
+.filter-btn{padding:10px 24px;border-radius:25px;border:2px solid var(--primary-light);background:white;color:var(--text-medium);font-weight:600;cursor:pointer;transition:var(--transition);font-family:inherit;font-size:14px}
+.filter-btn:hover,.filter-btn.active{background:var(--primary);color:white;border-color:var(--primary)}
+.products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.product-card{background:white;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:var(--transition);position:relative}
+.product-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-hover)}
+.product-card-img{height:280px;background:linear-gradient(135deg,var(--light-pink),var(--secondary));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.product-card-img i{font-size:80px;color:var(--primary);opacity:0.6;transition:var(--transition)}
+.product-card:hover .product-card-img i{transform:scale(1.1);opacity:0.8}
+.product-badge{position:absolute;top:12px;left:12px;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:700}
+.badge-new{background:var(--primary);color:white}
+.badge-sale{background:#ff5722;color:white}
+.badge-hot{background:linear-gradient(135deg,#ff9800,#ff5722);color:white}
+.product-wishlist{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;background:white;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--transition);box-shadow:var(--shadow);font-size:16px;color:var(--text-light)}
+.product-wishlist:hover,.product-wishlist.active{background:var(--primary);color:white}
+.product-info{padding:20px}
+.product-category{font-size:12px;color:var(--primary);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.product-name{font-size:16px;font-weight:700;color:var(--text-dark);margin-bottom:8px;line-height:1.4}
+.product-rating{display:flex;align-items:center;gap:6px;margin-bottom:12px}
+.product-rating .stars{color:#ffc107;font-size:13px}
+.product-rating span{font-size:13px;color:var(--text-light)}
+.product-price-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.product-price{display:flex;align-items:center;gap:8px}
+.price-current{font-size:20px;font-weight:900;color:var(--primary-dark)}
+.price-old{font-size:14px;color:var(--text-light);text-decoration:line-through}
+.product-add-cart{width:100%;padding:12px;border-radius:var(--radius-sm);border:none;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white;font-weight:700;font-size:14px;cursor:pointer;transition:var(--transition);display:flex;align-items:center;justify-content:center;gap:8px;font-family:inherit}
+.product-add-cart:hover{transform:scale(1.02);box-shadow:0 4px 15px rgba(233,30,99,0.3)}
+.product-add-cart.added{background:linear-gradient(135deg,#4caf50,#388e3c)}
+.features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.feature-card{background:white;padding:40px 30px;border-radius:var(--radius);text-align:center;box-shadow:var(--shadow);transition:var(--transition);border:2px solid transparent}
+.feature-card:hover{transform:translateY(-6px);border-color:var(--primary-light);box-shadow:var(--shadow-hover)}
+.feature-icon{width:70px;height:70px;background:linear-gradient(135deg,var(--light-pink),var(--secondary));border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px;color:var(--primary);transition:var(--transition)}
+.feature-card:hover .feature-icon{background:linear-gradient(135deg,var(--primary),var(--accent));color:white;transform:rotateY(360deg)}
+.feature-card h3{font-size:18px;font-weight:700;margin-bottom:10px;color:var(--text-dark)}
+.feature-card p{font-size:14px;color:var(--text-medium);line-height:1.6}
+.about-section{background:linear-gradient(135deg,var(--light-pink),var(--secondary))}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-image{position:relative}
+.about-image-main{width:100%;height:500px;background:linear-gradient(135deg,var(--primary-light),var(--accent));border-radius:var(--radius);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-hover);position:relative;overflow:hidden}
+.about-image-main i{font-size:100px;color:rgba(255,255,255,0.8)}
+.about-stats{position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);display:flex;gap:20px;background:white;padding:20px 30px;border-radius:var(--radius);box-shadow:var(--shadow-hover)}
+.stat-item{text-align:center;padding:0 15px;border-right:1px solid var(--light-pink)}
+.stat-item:last-child{border-right:none}
+.stat-number{font-size:28px;font-weight:900;color:var(--primary);display:block}
+.stat-label{font-size:13px;color:var(--text-medium);font-weight:500}
+.about-content h2{font-size:36px;font-weight:900;margin-bottom:20px;color:var(--text-dark)}
+.about-content h2 span{color:var(--primary)}
+.about-content p{font-size:16px;color:var(--text-medium);line-height:1.8;margin-bottom:24px}
+.about-list{list-style:none;margin-bottom:30px}
+.about-list li{display:flex;align-items:center;gap:12px;margin-bottom:14px;font-size:15px;color:var(--text-dark);font-weight:500}
+.about-list li i{width:28px;height:28px;background:var(--light-pink);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:12px}
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.testimonial-card{background:white;padding:30px;border-radius:var(--radius);box-shadow:var(--shadow);transition:var(--transition);position:relative}
+.testimonial-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+.testimonial-quote{font-size:50px;color:var(--primary-light);line-height:1;margin-bottom:10px}
+.testimonial-text{font-size:15px;color:var(--text-medium);line-height:1.8;margin-bottom:20px;font-style:italic}
+.testimonial-author{display:flex;align-items:center;gap:14px}
+.testimonial-avatar{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--primary-light),var(--accent));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px}
+.testimonial-info h4{font-size:15px;font-weight:700;color:var(--text-dark)}
+.testimonial-info p{font-size:13px;color:var(--text-light)}
+.testimonial-stars{color:#ffc107;font-size:14px;margin-top:4px}
+.contact-section{background:linear-gradient(135deg,var(--text-dark),#1a1a2e);color:white;position:relative;overflow:hidden}
+.contact-section::before{content:'';position:absolute;top:-50%;right:-20%;width:500px;height:500px;background:radial-gradient(circle,rgba(233,30,99,0.15) 0%,transparent 70%);border-radius:50%}
+.contact-section .section-title,.contact-section .section-desc{color:white}
+.contact-section .section-tag{background:rgba(255,255,255,0.1);color:var(--accent)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start}
+.contact-info h3{font-size:24px;font-weight:700;margin-bottom:20px}
+.contact-info p{font-size:15px;color:rgba(255,255,255,0.7);line-height:1.8;margin-bottom:30px}
+.contact-item{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.contact-item-icon{width:50px;height:50px;background:rgba(233,30,99,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:18px}
+.contact-item-info h4{font-size:15px;font-weight:700;margin-bottom:4px}
+.contact-item-info p{font-size:14px;color:rgba(255,255,255,0.6);margin:0}
+.contact-form{background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);padding:40px;border-radius:var(--radius);border:1px solid rgba(255,255,255,0.1)}
+.form-group{margin-bottom:20px}
+.form-group label{display:block;font-size:14px;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.8)}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:14px 18px;border-radius:var(--radius-sm);border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.05);color:white;font-family:inherit;font-size:15px;transition:var(--transition)}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--primary);background:rgba(255,255,255,0.1)}
+.form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,0.4)}
+.form-group textarea{min-height:120px;resize:vertical}
+.whatsapp-btn{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:16px;background:linear-gradient(135deg,#25d366,#128c7e);color:white;border:none;border-radius:var(--radius-sm);font-weight:700;font-size:16px;cursor:pointer;transition:var(--transition);font-family:inherit;text-decoration:none}
+.whatsapp-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(37,211,102,0.3)}
+.whatsapp-btn i{font-size:24px}
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:2000;opacity:0;visibility:hidden;transition:var(--transition)}
+.cart-overlay.active{opacity:1;visibility:visible}
+.cart-sidebar{position:fixed;top:0;right:0;width:420px;max-width:100%;height:100vh;background:white;z-index:2001;transform:translateX(100%);transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column}
+html[dir="ltr"] .cart-sidebar{right:auto;left:0;transform:translateX(-100%)}
+.cart-sidebar.active{transform:translateX(0)}
+.cart-header{padding:24px;border-bottom:1px solid var(--light-pink);display:flex;align-items:center;justify-content:space-between}
+.cart-header h2{font-size:20px;font-weight:800;display:flex;align-items:center;gap:10px}
+.cart-header h2 i{color:var(--primary)}
+.cart-close{background:none;border:none;font-size:24px;color:var(--text-medium);cursor:pointer;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:var(--transition)}
+.cart-close:hover{background:var(--light-pink);color:var(--primary)}
+.cart-items{flex:1;overflow-y:auto;padding:20px}
+.cart-empty{text-align:center;padding:60px 20px}
+.cart-empty i{font-size:60px;color:var(--primary-light);margin-bottom:20px}
+.cart-empty h3{font-size:18px;color:var(--text-dark);margin-bottom:10px}
+.cart-empty p{color:var(--text-light);font-size:14px}
+.cart-item{display:flex;gap:16px;padding:16px;background:var(--off-white);border-radius:var(--radius-sm);margin-bottom:12px;transition:var(--transition)}
+.cart-item:hover{background:var(--light-pink)}
+.cart-item-img{width:80px;height:80px;background:linear-gradient(135deg,var(--light-pink),var(--secondary));border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cart-item-img i{font-size:30px;color:var(--primary);opacity:0.6}
+.cart-item-details{flex:1}
+.cart-item-name{font-size:14px;font-weight:700;color:var(--text-dark);margin-bottom:4px}
+.cart-item-price{font-size:15px;font-weight:900;color:var(--primary);margin-bottom:8px}
+.cart-item-qty{display:flex;align-items:center;gap:10px}
+.qty-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--primary-light);background:white;color:var(--primary);font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--transition);font-size:16px}
+.qty-btn:hover{background:var(--primary);color:white}
+.qty-value{font-weight:700;font-size:14px;min-width:24px;text-align:center}
+.cart-item-remove{background:none;border:none;color:var(--text-light);cursor:pointer;font-size:16px;transition:var(--transition);align-self:flex-start}
+.cart-item-remove:hover{color:#f44336}
+.cart-footer{padding:24px;border-top:1px solid var(--light-pink);background:white}
+.cart-total{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.cart-total-label{font-size:14px;color:var(--text-medium)}
+.cart-total-value{font-size:24px;font-weight:900;color:var(--primary-dark)}
+.cart-total-note{font-size:12px;color:var(--text-light);margin-bottom:16px;text-align:center}
+.cart-checkout-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px;background:linear-gradient(135deg,#25d366,#128c7e);color:white;border:none;border-radius:var(--radius-sm);font-weight:700;font-size:16px;cursor:pointer;transition:var(--transition);font-family:inherit;text-decoration:none}
+.cart-checkout-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(37,211,102,0.3)}
+.cart-continue{display:block;text-align:center;margin-top:12px;color:var(--primary);font-weight:600;font-size:14px;cursor:pointer;text-decoration:none}
+.cart-continue:hover{text-decoration:underline}
+.footer{background:var(--text-dark);color:white;padding:60px 24px 30px}
+.footer-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-brand .logo-text{color:white;margin-bottom:16px;display:block}
+.footer-brand p{font-size:14px;color:rgba(255,255,255,0.6);line-height:1.7;margin-bottom:20px}
+.footer-social{display:flex;gap:12px}
+.footer-social a{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;transition:var(--transition);font-size:16px}
+.footer-social a:hover{background:var(--primary);transform:translateY(-3px)}
+.footer-column h3{font-size:16px;font-weight:700;margin-bottom:20px;color:white}
+.footer-column ul{list-style:none}
+.footer-column ul li{margin-bottom:12px}
+.footer-column ul li a{color:rgba(255,255,255,0.6);text-decoration:none;font-size:14px;transition:var(--transition);display:flex;align-items:center;gap:8px}
+.footer-column ul li a:hover{color:var(--accent);padding-right:5px}
+.footer-bottom{max-width:1400px;margin:0 auto;padding-top:30px;border-top:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-bottom p{font-size:14px;color:rgba(255,255,255,0.5)}
+.footer-payment{display:flex;gap:12px}
+.footer-payment i{font-size:28px;color:rgba(255,255,255,0.4)}
+.toast-container{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);z-index:3000;display:flex;flex-direction:column;gap:10px}
+.toast{background:white;padding:16px 24px;border-radius:var(--radius-sm);box-shadow:0 10px 40px rgba(0,0,0,0.15);display:flex;align-items:center;gap:12px;animation:slideInRight 0.4s ease, fadeIn 0.4s ease;min-width:300px;border-right:4px solid var(--primary)}
+html[dir="ltr"] .toast{border-right:none;border-left:4px solid var(--primary)}
+.toast.success{border-color:#4caf50}
+.toast.error{border-color:#f44336}
+.toast-icon{width:40px;height:40px;border-radius:50%;background:var(--light-pink);display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:18px}
+.toast.success .toast-icon{background:#e8f5e9;color:#4caf50}
+.toast.error .toast-icon{background:#ffebee;color:#f44336}
+.toast-content h4{font-size:14px;font-weight:700;color:var(--text-dark);margin-bottom:2px}
+.toast-content p{font-size:13px;color:var(--text-medium)}
+@media(max-width:1200px){.products-grid,.categories-grid,.features-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:992px){.hero-inner{grid-template-columns:1fr;text-align:center}.hero-content h1{font-size:40px}.hero-badges,.hero-buttons{justify-content:center}.hero-image{order:-1}.hero-image-main{height:400px;max-width:400px;margin:0 auto}.about-grid,.contact-grid{grid-template-columns:1fr}.about-image{order:-1}.about-stats{position:relative;bottom:auto;left:auto;transform:none;margin-top:20px;justify-content:center}.footer-grid{grid-template-columns:repeat(2,1fr)}.testimonials-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.nav-links{display:none}.menu-btn{display:block}.products-grid,.categories-grid,.features-grid,.testimonials-grid{grid-template-columns:repeat(2,1fr)}.hero-content h1{font-size:32px}.section-title{font-size:28px}.floating-card{display:none}.footer-grid{grid-template-columns:1fr;text-align:center}.footer-social{justify-content:center}.footer-bottom{flex-direction:column;text-align:center}}
+@media(max-width:480px){.products-grid,.categories-grid,.features-grid,.testimonials-grid{grid-template-columns:1fr}.hero-content h1{font-size:26px}.hero-image-main{height:300px}.cart-sidebar{width:100%}.about-stats{flex-direction:column;gap:10px}.stat-item{border-right:none;border-bottom:1px solid var(--light-pink);padding-bottom:10px}.stat-item:last-child{border-bottom:none}}
+.scroll-reveal{opacity:0;transform:translateY(30px);transition:all 0.8s ease}
+.scroll-reveal.revealed{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+<!-- Header -->
+<<header class="header" id="header">
+<div class="header-inner">
+<a href="#" class="logo" onclick="showSection('home')">
+<div class="logo-icon"><i class="fas fa-spa"></i></div>
+<div class="logo-text">روز <span>لانجري</span></div>
+</a>
+<<nav>
+<ul class="nav-links" id="navLinks">
+<li><a href="#home" class="active" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+<li><a href="#products" data-ar="المتجر" data-en="Shop">المتجر</a></li>
+<li><a href="#about" data-ar="من نحن" data-en="About">من نحن</a></li>
+<li><a href="#testimonials" data-ar="آراء العملاء" data-en="Reviews">آراء العملاء</a></li>
+<li><a href="#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a></li>
+</ul>
+</nav>
+<div class="header-actions">
+<button class="lang-btn" id="langBtn" onclick="toggleLanguage()">EN</button>
+<button class="cart-btn" onclick="toggleCart()">
+<i class="fas fa-shopping-bag"></i>
+<span class="cart-count" id="cartCount">0</span>
+</button>
+<button class="menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+</div>
+</div>
+<div class="mobile-menu" id="mobileMenu">
+<a href="#home" onclick="showSection('home');toggleMobileMenu()" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+<a href="#products" onclick="showSection('products');toggleMobileMenu()" data-ar="المتجر" data-en="Shop">المتجر</a>
+<a href="#about" onclick="showSection('about');toggleMobileMenu()" data-ar="من نحن" data-en="About">من نحن</a>
+<a href="#testimonials" onclick="showSection('testimonials');toggleMobileMenu()" data-ar="آراء العملاء" data-en="Reviews">آراء العملاء</a>
+<a href="#contact" onclick="showSection('contact');toggleMobileMenu()" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+</div>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="home">
+<div class="hero-inner">
+<div class="hero-content">
+<h1 class="animate-fade-up" data-ar="أناقة تبدأ من <span class='highlight'>الداخل</span>" data-en="Elegance Starts <span class='highlight'>Within</span>">أناقة تبدأ من <span class="highlight">الداخل</span></h1>
+<p class="animate-fade-up" style="animation-delay:0.1s" data-ar="اكتشفي تشكيلتنا الفاخرة من الملابس الداخلية والفساتين. تصاميم أنيقة، خامات فاخرة، وراحة لا مثيل لها." data-en="Discover our luxurious collection of lingerie and dresses. Elegant designs, premium fabrics, and unmatched comfort.">اكتشفي تشكيلتنا الفاخرة من الملابس الداخلية والفساتين. تصاميم أنيقة، خامات فاخرة، وراحة لا مثيل لها.</p>
+<div class="hero-badges animate-fade-up" style="animation-delay:0.2s">
+<div class="badge"><i class="fas fa-truck"></i> <span data-ar="توصيل سريع" data-en="Fast Delivery">توصيل سريع</span></div>
+<div class="badge"><i class="fas fa-shield-alt"></i> <span data-ar="جودة مضمونة" data-en="Guaranteed Quality">جودة مضمونة</span></div>
+<div class="badge"><i class="fas fa-undo"></i> <span data-ar="استبدال سهل" data-en="Easy Exchange">استبدال سهل</span></div>
+</div>
+<div class="hero-buttons animate-fade-up" style="animation-delay:0.3s">
+<a href="#products" class="btn btn-primary" onclick="showSection('products')"><i class="fas fa-shopping-bag"></i><span data-ar="تسوقي الآن" data-en="Shop Now">تسوقي الآن</span></a>
+<a href="#about" class="btn btn-outline" onclick="showSection('about')"><i class="fas fa-play-circle"></i><span data-ar="اكتشفي المزيد" data-en="Learn More">اكتشفي المزيد</span></a>
+</div>
+</div>
+<div class="hero-image">
+<div class="hero-image-main"><i class="fas fa-venus"></i></div>
+<div class="floating-card card-1">
+<i class="fas fa-award" style="font-size:30px;color:var(--primary)"></i>
+<div class="floating-card-info">
+<h4 data-ar="أفضل جودة" data-en="Best Quality">أفضل جودة</h4>
+<p data-ar="100% قطن طبيعي" data-en="100% Natural Cotton">100% قطن طبيعي</p>
+</div>
+</div>
+<div class="floating-card card-2">
+<div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+<div class="floating-card-info">
+<h4 data-ar="+5000 عميلة سعيدة" data-en="5000+ Happy Customers">+5000 عميلة سعيدة</h4>
+<p data-ar="تقييم 4.9/5" data-en="Rated 4.9/5">تقييم 4.9/5</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Categories -->
+<section class="section" id="categories">
+<div class="section-header scroll-reveal">
+<span class="section-tag" data-ar="تصنيفات" data-en="Categories">تصنيفات</span>
+<h2 class="section-title" data-ar="تصفحي <span>التصنيفات</span>" data-en="Browse <span>Categories</span>">تصفحي <span>التصنيفات</span></h2>
+<p class="section-desc" data-ar="اختيارات واسعة تناسب كل الأذواق والمناسبات" data-en="Wide selections to suit every taste and occasion">اختيارات واسعة تناسب كل الأذواق والمناسبات</p>
+</div>
+<div class="categories-grid" id="categoriesGrid"></div>
+</section>
+
+<!-- Products -->
+<section class="section products-section" id="products">
+<div class="section-header scroll-reveal">
+<span class="section-tag" data-ar="المتجر" data-en="Shop">المتجر</span>
+<h2 class="section-title" data-ar="منتجاتنا <span>المميزة</span>" data-en="Our <span>Featured</span> Products">منتجاتنا <span>المميزة</span></h2>
+<p class="section-desc" data-ar="أفضل التصاميم بأجود الخامات وبأسعار تنافسية" data-en="Best designs with premium fabrics at competitive prices">أفضل التصاميم بأجود الخامات وبأسعار تنافسية</p>
+</div>
+<div class="products-filter scroll-reveal" id="productsFilter">
+<button class="filter-btn active" data-filter="all" data-ar="الكل" data-en="All">الكل</button>
+<button class="filter-btn" data-filter="lingerie" data-ar="لانجري" data-en="Lingerie">لانجري</button>
+<button class="filter-btn" data-filter="dresses" data-ar="فساتين" data-en="Dresses">فساتين</button>
+<button class="filter-btn" data-filter="sleepwear" data-ar="ملابس نوم" data-en="Sleepwear">ملابس نوم</button>
+<button class="filter-btn" data-filter="activewear" data-ar="رياضية" data-en="Activewear">رياضية</button>
+</div>
+<div class="products-grid" id="productsGrid"></div>
+</section>
+
+<!-- Features -->
+<section class="section" id="features">
+<div class="section-header scroll-reveal">
+<span class="section-tag" data-ar="لماذا نحن" data-en="Why Us">لماذا نحن</span>
+<h2 class="section-title" data-ar="نحن <span>الأفضل</span> لأن..." data-en="We Are <span>The Best</span> Because...">نحن <span>الأفضل</span> لأن...</h2>
+</div>
+<div class="features-grid" id="featuresGrid"></div>
+</section>
+
+<!-- About -->
+<section class="section about-section" id="about">
+<div class="about-grid">
+<div class="about-image scroll-reveal">
+<div class="about-image-main"><i class="fas fa-gem"></i></div>
+<div class="about-stats">
+<div class="stat-item"><span class="stat-number">+5000</span><span class="stat-label" data-ar="عميلة" data-en="Customers">عميلة</span></div>
+<div class="stat-item"><span class="stat-number">+200</span><span class="stat-label" data-ar="منتج" data-en="Products">منتج</span></div>
+<div class="stat-item"><span class="stat-number">4.9</span><span class="stat-label" data-ar="تقييم" data-en="Rating">تقييم</span></div>
+</div>
+</div>
+<div class="about-content scroll-reveal">
+<h2 data-ar="قصة <span>روز لانجري</span>" data-en="The Story of <span>Rose Lingerie</span>">قصة <span>روز لانجري</span></h2>
+<p data-ar="منذ عام 2020، نسعى في روز لانجري لتقديم تجربة تسوق فريدة للمرأة العربية. نؤمن بأن كل امرأة تستحق أن تشعر بالثقة والأناقة من الداخل إلى الخارج." data-en="Since 2020, Rose Lingerie has been dedicated to providing a unique shopping experience for Arab women. We believe every woman deserves to feel confident and elegant from the inside out.">منذ عام 2020، نسعى في روز لانجري لتقديم تجربة تسوق فريدة للمرأة العربية. نؤمن بأن كل امرأة تستحق أن تشعر بالثقة والأناقة من الداخل إلى الخارج.</p>
+<p data-ar="نختار بعناية كل قطعة في مجموعتنا، من أجود الخامات الطبيعية والأقمشة الفاخرة، لضمان الراحة والجودة في كل منتج." data-en="We carefully select every piece in our collection, from the finest natural materials and luxurious fabrics, ensuring comfort and quality in every product.">نختار بعناية كل قطعة في مجموعتنا، من أجود الخامات الطبيعية والأقمشة الفاخرة، لضمان الراحة والجودة في كل منتج.</p>
+<ul class="about-list">
+<li><i class="fas fa-check"></i> <span data-ar="خامات 100% طبيعية" data-en="100% Natural Materials">خامات 100% طبيعية</span></li>
+<li><i class="fas fa-check"></i> <span data-ar="تصاميم عصرية وأنيقة" data-en="Modern & Elegant Designs">تصاميم عصرية وأنيقة</span></li>
+<li><i class="fas fa-check"></i> <span data-ar="أسعار تنافسية" data-en="Competitive Prices">أسعار تنافسية</span></li>
+<li><i class="fas fa-check"></i> <span data-ar="توصيل سريع لجميع المناطق" data-en="Fast Delivery to All Areas">توصيل سريع لجميع المناطق</span></li>
+<li><i class="fas fa-check"></i> <span data-ar="خدمة عملاء 24/7" data-en="24/7 Customer Service">خدمة عملاء 24/7</span></li>
+</ul>
+<a href="#contact" class="btn btn-primary" onclick="showSection('contact')"><i class="fab fa-whatsapp"></i><span data-ar="تواصلي معنا" data-en="Contact Us">تواصلي معنا</span></a>
+</div>
+</div>
+</section>
+
+<!-- Testimonials -->
+<section class="section" id="testimonials">
+<div class="section-header scroll-reveal">
+<span class="section-tag" data-ar="آراء العملاء" data-en="Testimonials">آراء العملاء</span>
+<h2 class="section-title" data-ar="ماذا تقول <span>عملاؤنا</span> عنا؟" data-en="What Our <span>Customers</span> Say">ماذا تقول <span>عملاؤنا</span> عنا؟</h2>
+</div>
+<div class="testimonials-grid" id="testimonialsGrid"></div>
+</section>
+
+<!-- Contact -->
+<section class="section contact-section" id="contact">
+<div class="section-header scroll-reveal">
+<span class="section-tag" data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</span>
+<h2 class="section-title" data-ar="اطلبي <span>الآن</span> عبر الواتساب" data-en="Order <span>Now</span> via WhatsApp">اطلبي <span>الآن</span> عبر الواتساب</h2>
+<p class="section-desc" data-ar="املئي النموذج وسنرسل لك تفاصيل طلبك مباشرة على واتساب" data-en="Fill out the form and we'll send your order details directly to WhatsApp">املئي النموذج وسنرسل لك تفاصيل طلبك مباشرة على واتساب</p>
+</div>
+<div class="contact-grid">
+<div class="contact-info scroll-reveal">
+<h3 data-ar="معلومات التواصل" data-en="Contact Info">معلومات التواصل</h3>
+<p data-ar="نحن هنا لمساعدتك! تواصلي معنا عبر أي من القنوات التالية وسنرد عليك في أقرب وقت." data-en="We're here to help! Contact us through any of the channels below and we'll respond as soon as possible.">نحن هنا لمساعدتك! تواصلي معنا عبر أي من القنوات التالية وسنرد عليك في أقرب وقت.</p>
+<div class="contact-item">
+<div class="contact-item-icon"><i class="fab fa-whatsapp"></i></div>
+<div class="contact-item-info"><h4 data-ar="واتساب" data-en="WhatsApp">واتساب</h4><p>+963 983 849 307</p></div>
+</div>
+<div class="contact-item">
+<div class="contact-item-icon"><i class="fas fa-phone"></i></div>
+<div class="contact-item-info"><h4 data-ar="هاتف" data-en="Phone">هاتف</h4><p>+963 983 849 307</p></div>
+</div>
+<div class="contact-item">
+<div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
+<div class="contact-item-info"><h4 data-ar="بريد إلكتروني" data-en="Email">بريد إلكتروني</h4><p>hello@roselingerie.com</p></div>
+</div>
+<div class="contact-item">
+<div class="contact-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+<div class="contact-item-info"><h4 data-ar="الموقع" data-en="Location">الموقع</h4><p data-ar="دمشق، سوريا" data-en="Damascus, Syria">دمشق، سوريا</p></div>
+</div>
+</div>
+<div class="contact-form scroll-reveal">
+<div class="form-group">
+<label data-ar="الاسم الكامل" data-en="Full Name">الاسم الكامل</label>
+<input type="text" id="contactName" placeholder="" data-ar-placeholder="أدخلي اسمك الكامل" data-en-placeholder="Enter your full name">
+</div>
+<div class="form-group">
+<label data-ar="رقم الهاتف" data-en="Phone Number">رقم الهاتف</label>
+<input type="tel" id="contactPhone" placeholder="" data-ar-placeholder="09XXXXXXXX" data-en-placeholder="09XXXXXXXX">
+</div>
+<div class="form-group">
+<label data-ar="المدينة" data-en="City">المدينة</label>
+<select id="contactCity">
+<option value="" data-ar="اختر المدينة" data-en="Select City">اختر المدينة</option>
+<option value="دمشق">دمشق / Damascus</option>
+<option value="حلب">حلب / Aleppo</option>
+<option value="حمص">حمص / Homs</option>
+<option value="اللاذقية">اللاذقية / Latakia</option>
+<option value="طرطوس">طرطوس / Tartus</option>
+<option value="درعا">درعا / Daraa</option>
+<option value="إدلب">إدلب / Idlib</option>
+<option value="أخرى">أخرى / Other</option>
+</select>
+</div>
+<div class="form-group">
+<label data-ar="ملاحظات الطلب" data-en="Order Notes">ملاحظات الطلب</label>
+<<textarea id="contactNotes" placeholder="" data-ar-placeholder="اكتبي أي ملاحظات خاصة بالطلب..." data-en-placeholder="Write any special notes for your order..."></textarea>
+</div>
+<a href="#" class="whatsapp-btn" id="whatsappBtn" onclick="sendWhatsAppOrder(event)"><i class="fab fa-whatsapp"></i><span data-ar="إرسال الطلب عبر واتساب" data-en="Send Order via WhatsApp">إرسال الطلب عبر واتساب</span></a>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<<footer class="footer">
+<div class="footer-grid">
+<div class="footer-brand">
+<div class="logo-text">روز <span>لانجري</span></div>
+<p data-ar="وجهتك الأولى للأناقة والراحة. نقدم لكِ أجود الملابس الداخلية والفساتين بأحدث التصاميم." data-en="Your first destination for elegance and comfort. We offer the finest lingerie and dresses with the latest designs.">وجهتك الأولى للأناقة والراحة. نقدم لكِ أجود الملابس الداخلية والفساتين بأحدث التصاميم.</p>
+<div class="footer-social">
+<a href="#"><i class="fab fa-instagram"></i></a>
+<a href="#"><i class="fab fa-tiktok"></i></a>
+<a href="#"><i class="fab fa-snapchat"></i></a>
+<a href="#"><i class="fab fa-twitter"></i></a>
+</div>
+</div>
+<div class="footer-column">
+<h3 data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h3>
+<ul>
+<li><a href="#home" onclick="showSection('home')" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+<li><a href="#products" onclick="showSection('products')" data-ar="المتجر" data-en="Shop">المتجر</a></li>
+<li><a href="#about" onclick="showSection('about')" data-ar="من نحن" data-en="About">من نحن</a></li>
+<li><a href="#contact" onclick="showSection('contact')" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a></li>
+</ul>
+</div>
+<div class="footer-column">
+<h3 data-ar="التصنيفات" data-en="Categories">التصنيفات</h3>
+<ul>
+<li><a href="#products" onclick="filterProducts('lingerie')" data-ar="لانجري" data-en="Lingerie">لانجري</a></li>
+<li><a href="#products" onclick="filterProducts('dresses')" data-ar="فساتين" data-en="Dresses">فساتين</a></li>
+<li><a href="#products" onclick="filterProducts('sleepwear')" data-ar="ملابس نوم" data-en="Sleepwear">ملابس نوم</a></li>
+<li><a href="#products" onclick="filterProducts('activewear')" data-ar="رياضية" data-en="Activewear">رياضية</a></li>
+</ul>
+</div>
+<div class="footer-column">
+<h3 data-ar="المساعدة" data-en="Help">المساعدة</h3>
+<ul>
+<li><a href="#" data-ar="سياسة الخصوصية" data-en="Privacy Policy">سياسة الخصوصية</a></li>
+<li><a href="#" data-ar="شروط الاستخدام" data-en="Terms of Use">شروط الاستخدام</a></li>
+<li><a href="#" data-ar="سياسة الإرجاع" data-en="Return Policy">سياسة الإرجاع</a></li>
+<li><a href="#" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<p data-ar="© 2025 روز لانجري. جميع الحقوق محفوظة." data-en="© 2025 Rose Lingerie. All rights reserved.">© 2025 روز لانجري. جميع الحقوق محفوظة.</p>
+<div class="footer-payment">
+<i class="fab fa-cc-visa"></i>
+<i class="fab fa-cc-mastercard"></i>
+<i class="fab fa-cc-paypal"></i>
+<i class="fab fa-apple-pay"></i>
+</div>
+</div>
+</footer>
+
+<!-- Cart Sidebar -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+<div class="cart-header">
+<h2><i class="fas fa-shopping-bag"></i> <span data-ar="سلة التسوق" data-en="Shopping Cart">سلة التسوق</span></h2>
+<button class="cart-close" onclick="toggleCart()"><i class="fas fa-times"></i></button>
+</div>
+<div class="cart-items" id="cartItems">
+<div class="cart-empty">
+<i class="fas fa-shopping-bag"></i>
+<h3 data-ar="سلة التسوق فارغة" data-en="Cart is Empty">سلة التسوق فارغة</h3>
+<p data-ar="أضيفي بعض المنتجات إلى السلة" data-en="Add some products to your cart">أضيفي بعض المنتجات إلى السلة</p>
+</div>
+</div>
+<div class="cart-footer" id="cartFooter" style="display:none">
+<div class="cart-total">
+<span class="cart-total-label" data-ar="الإجمالي:" data-en="Total:">الإجمالي:</span>
+<span class="cart-total-value" id="cartTotal">0 $</span>
+</div>
+<p class="cart-total-note" data-ar="سيتم إرسال تفاصيل الطلب عبر واتساب" data-en="Order details will be sent via WhatsApp">سيتم إرسال تفاصيل الطلب عبر واتساب</p>
+<a href="#" class="cart-checkout-btn" onclick="sendCartWhatsApp(event)"><i class="fab fa-whatsapp"></i><span data-ar="إتمام الطلب عبر واتساب" data-en="Complete Order via WhatsApp">إتمام الطلب عبر واتساب</span></a>
+<a href="#" class="cart-continue" onclick="toggleCart()" data-ar="مواصلة التسوق" data-en="Continue Shopping">مواصلة التسوق</a>
+</div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+<script>
+const categories=[
+{id:'lingerie',icon:'fa-heart',nameAr:'لانجري',nameEn:'Lingerie',count:45,descAr:'تشكيلة واسعة من الملابس الداخلية الأنيقة',descEn:'Wide collection of elegant lingerie'},
+{id:'dresses',icon:'fa-female',nameAr:'فساتين',nameEn:'Dresses',count:32,descAr:'فساتين سهرة ومناسبات بأحدث التصاميم',descEn:'Evening & occasion dresses with latest designs'},
+{id:'sleepwear',icon:'fa-moon',nameAr:'ملابس نوم',nameEn:'Sleepwear',count:28,descAr:'راحة وأناقة في كل ليلة',descEn:'Comfort & elegance every night'},
+{id:'activewear',icon:'fa-running',nameAr:'رياضية',nameEn:'Activewear',count:20,descAr:'ملابس رياضية أنيقة ومريحة',descEn:'Stylish & comfortable activewear'}
+];
+
+const products=[
+{id:1,category:'lingerie',nameAr:'طقم لانجري دانتيل فاخر',nameEn:'Luxury Lace Lingerie Set',price:149,oldPrice:199,rating:4.9,reviews:128,badge:'hot',icon:'fa-vest'},
+{id:2,category:'lingerie',nameAr:'سوتيان بدون أسلاك',nameEn:'Wireless Bra',price:89,oldPrice:120,rating:4.8,reviews:95,badge:'sale',icon:'fa-tshirt'},
+{id:3,category:'lingerie',nameAr:'طقم قطن ناعم',nameEn:'Soft Cotton Set',price:79,oldPrice:null,rating:4.7,reviews:210,badge:'new',icon:'fa-vest-patches'},
+{id:4,category:'dresses',nameAr:'فستان سهرة مخمل',nameEn:'Velvet Evening Dress',price:299,oldPrice:399,rating:4.9,reviews:67,badge:'hot',icon:'fa-female'},
+{id:5,category:'dresses',nameAr:'فستان كاجوال قطن',nameEn:'Casual Cotton Dress',price:129,oldPrice:null,rating:4.6,reviews:156,badge:'new',icon:'fa-female'},
+{id:6,category:'dresses',nameAr:'فستان حفلات شيفون',nameEn:'Chiffon Party Dress',price:249,oldPrice:329,rating:4.8,reviews:89,badge:'sale',icon:'fa-female'},
+{id:7,category:'sleepwear',nameAr:'بيجاما حريرية',nameEn:'Silk Pajama Set',price:179,oldPrice:null,rating:4.9,reviews:134,badge:'new',icon:'fa-bed'},
+{id:8,category:'sleepwear',nameAr:'روب نوم فاخر',nameEn:'Luxury Night Robe',price:159,oldPrice:219,rating:4.7,reviews:78,badge:'sale',icon:'fa-bath'},
+{id:9,category:'sleepwear',nameAr:'طقم نوم قطن',nameEn:'Cotton Sleep Set',price:99,oldPrice:null,rating:4.6,reviews:245,badge:'hot',icon:'fa-bed'},
+{id:10,category:'activewear',nameAr:'طقم رياضي يوغا',nameEn:'Yoga Activewear Set',price:119,oldPrice:null,rating:4.8,reviews:112,badge:'new',icon:'fa-running'},
+{id:11,category:'activewear',nameAr:'ليقنز رياضي',nameEn:'Sports Leggings',price:89,oldPrice:129,rating:4.7,reviews:198,badge:'sale',icon:'fa-running'},
+{id:12,category:'lingerie',nameAr:'سوتيان رياضي',nameEn:'Sports Bra',price:69,oldPrice:null,rating:4.5,reviews:167,badge:'new',icon:'fa-vest'},
+{id:13,category:'dresses',nameAr:'فستان ميدي أنيق',nameEn:'Elegant Midi Dress',price:189,oldPrice:null,rating:4.8,reviews:93,badge:'hot',icon:'fa-female'},
+{id:14,category:'sleepwear',nameAr:'قميص نوم قصير',nameEn:'Short Nightshirt',price:79,oldPrice:109,rating:4.6,reviews:145,badge:'sale',icon:'fa-bed'},
+{id:15,category:'activewear',nameAr:'جاكيت رياضي',nameEn:'Sports Jacket',price:149,oldPrice:null,rating:4.7,reviews:76,badge:'new',icon:'fa-running'},
+{id:16,category:'lingerie',nameAr:'طقم دانتيل فرنسي',nameEn:'French Lace Set',price:199,oldPrice:259,rating:4.9,reviews:54,badge:'hot',icon:'fa-vest'}
+];
+
+const features=[
+{icon:'fa-shipping-fast',titleAr:'توصيل سريع',titleEn:'Fast Delivery',descAr:'توصيل خلال 24-48 ساعة لجميع المدن',descEn:'Delivery within 24-48 hours to all cities'},
+{icon:'fa-shield-alt',titleAr:'جودة مضمونة',titleEn:'Guaranteed Quality',descAr:'خامات 100% طبيعية وفحص جودة صارم',descEn:'100% natural materials & strict quality check'},
+{icon:'fa-undo',titleAr:'استبدال سهل',titleEn:'Easy Exchange',descAr:'استبدال أو إرجاع خلال 14 يوم',descEn:'Exchange or return within 14 days'},
+{icon:'fa-headset',titleAr:'دعم 24/7',titleEn:'24/7 Support',descAr:'فريق خدمة عملاء متاح على مدار الساعة',descEn:'Customer service team available around the clock'}
+];
+
+const testimonials=[
+{name:'سارة',nameEn:'Sarah',initial:'س',textAr:'جودة رائعة وخامات فاخرة! الطلب وصل بسرعة والتغليف كان ممتاز. سأطلب بالتأكيد مرة أخرى.',textEn:'Amazing quality and luxurious fabrics! The order arrived quickly and the packaging was excellent. Will definitely order again.',rating:5},
+{name:'نورة',nameEn:'Noura',initial:'ن',textAr:'أحببت التصاميم العصرية والألوان الجميلة. الأسعار منافسة جداً مقارنة بالجودة. شكراً روز لانجري!',textEn:'Loved the modern designs and beautiful colors. Prices are very competitive compared to quality. Thank you Rose Lingerie!',rating:5},
+{name:'ليلى',nameEn:'Laila',initial:'ل',textAr:'خدمة عملاء ممتازة وسريعة الاستجابة. ساعدوني في اختيار المقاس المناسب. تجربة تسوق رائعة!',textEn:'Excellent customer service with quick response. They helped me choose the right size. Great shopping experience!',rating:5}
+];
+
+let cart=JSON.parse(localStorage.getItem('roselingerie_cart'))||[];
+let wishlist=JSON.parse(localStorage.getItem('roselingerie_wishlist'))||[];
+let currentLang=localStorage.getItem('roselingerie_lang')||'ar';
+let currentFilter='all';
+
+document.addEventListener('DOMContentLoaded',function(){
+applyLanguage(currentLang,false);
+renderCategories();
+renderProducts();
+renderFeatures();
+renderTestimonials();
+updateCartUI();
+updatePlaceholders();
+window.addEventListener('scroll',function(){
+document.getElementById('header').classList.toggle('scrolled',window.scrollY>50);
+});
+const observer=new IntersectionObserver((entries)=>{
+entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('revealed');});
+},{threshold:0.1});
+document.querySelectorAll('.scroll-reveal').forEach(el=>observer.observe(el));
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+btn.addEventListener('click',function(){
+document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+this.classList.add('active');
+currentFilter=this.dataset.filter;
+renderProducts();
+});
+});
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+anchor.addEventListener('click',function(e){
+const href=this.getAttribute('href');
+if(href!=='#'){
+e.preventDefault();
+const target=document.querySelector(href);
+if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
+}
+});
+});
+});
+
+function toggleLanguage(){
+currentLang=currentLang==='ar'?'en':'ar';
+localStorage.setItem('roselingerie_lang',currentLang);
+applyLanguage(currentLang,true);
+}
+
+function applyLanguage(lang,animate){
+const html=document.documentElement;
+const btn=document.getElementById('langBtn');
+if(lang==='en'){html.setAttribute('dir','ltr');html.setAttribute('lang','en');btn.textContent='AR';}
+else{html.setAttribute('dir','rtl');html.setAttribute('lang','ar');btn.textContent='EN';}
+document.querySelectorAll('[data-ar][data-en]').forEach(el=>{
+const text=lang==='ar'?el.dataset.ar:el.dataset.en;
+if(el.tagName==='INPUT'||el.tagName==='TEXTAREA')el.placeholder=text;
+else el.innerHTML=text;
+});
+updatePlaceholders();
+renderCategories();
+renderProducts();
+renderFeatures();
+renderTestimonials();
+updateCartUI();
+}
+
+function updatePlaceholders(){
+document.querySelectorAll('[data-ar-placeholder][data-en-placeholder]').forEach(el=>{
+el.placeholder=currentLang==='ar'?el.dataset.arPlaceholder:el.dataset.enPlaceholder;
+});
+}
+
+function renderCategories(){
+const grid=document.getElementById('categoriesGrid');
+grid.innerHTML=categories.map(cat=>`
+<div class="category-card" onclick="filterProducts('${cat.id}')">
+<div class="category-card-img"><i class="fas ${cat.icon}"></i></div>
+<span class="category-count">${cat.count} ${currentLang==='ar'?'منتج':'Products'}</span>
+<div class="category-card-info">
+<h3>${currentLang==='ar'?cat.nameAr:cat.nameEn}</h3>
+<p>${currentLang==='ar'?cat.descAr:cat.descEn}</p>
+</div>
+</div>
+`).join('');
+}
+
+function renderProducts(){
+const grid=document.getElementById('productsGrid');
+const filtered=currentFilter==='all'?products:products.filter(p=>p.category===currentFilter);
+grid.innerHTML=filtered.map(p=>{
+const inWishlist=wishlist.includes(p.id);
+const badgeText=p.badge==='new'?(currentLang==='ar'?'جديد':'New'):p.badge==='sale'?(currentLang==='ar'?'خصم':'Sale'):p.badge==='hot'?(currentLang==='ar'?'الأكثر مبيعاً':'Best Seller'):'';
+return `
+<div class="product-card" data-category="${p.category}">
+<div class="product-card-img">
+<i class="fas ${p.icon}"></i>
+${p.badge?`<span class="product-badge badge-${p.badge}">${badgeText}</span>`:''}
+<button class="product-wishlist ${inWishlist?'active':''}" onclick="toggleWishlist(${p.id},event)"><i class="fas fa-heart"></i></button>
+</div>
+<div class="product-info">
+<div class="product-category">${currentLang==='ar'?categories.find(c=>c.id===p.category).nameAr:categories.find(c=>c.id===p.category).nameEn}</div>
+<h3 class="product-name">${currentLang==='ar'?p.nameAr:p.nameEn}</h3>
+<div class="product-rating">
+<span class="stars">${'★'.repeat(Math.floor(p.rating))}${'☆'.repeat(5-Math.floor(p.rating))}</span>
+<span>(${p.reviews})</span>
+</div>
+<div class="product-price-row">
+<div class="product-price">
+<span class="price-current">${p.price} ${currentLang==='ar'?'$':'USD'}</span>
+${p.oldPrice?`<span class="price-old">${p.oldPrice} ${currentLang==='ar'?'$':'USD'}</span>`:''}
+</div>
+</div>
+<button class="product-add-cart" onclick="addToCart(${p.id})">
+<i class="fas fa-shopping-bag"></i>
+<span>${currentLang==='ar'?'أضيفي إلى السلة':'Add to Cart'}</span>
+</button>
+</div>
+</div>`;
+}).join('');
+}
+
+function renderFeatures(){
+document.getElementById('featuresGrid').innerHTML=features.map(f=>`
+<div class="feature-card">
+<div class="feature-icon"><i class="fas ${f.icon}"></i></div>
+<h3>${currentLang==='ar'?f.titleAr:f.titleEn}</h3>
+<p>${currentLang==='ar'?f.descAr:f.descEn}</p>
+</div>
+`).join('');
+}
+
+function renderTestimonials(){
+document.getElementById('testimonialsGrid').innerHTML=testimonials.map(t=>`
+<div class="testimonial-card">
+<div class="testimonial-quote">"</div>
+<p class="testimonial-text">${currentLang==='ar'?t.textAr:t.textEn}</p>
+<div class="testimonial-author">
+<div class="testimonial-avatar">${t.initial}</div>
+<div class="testimonial-info">
+<h4>${currentLang==='ar'?t.name:t.nameEn}</h4>
+<div class="testimonial-stars">${'★'.repeat(t.rating)}</div>
+</div>
+</div>
+</div>
+`).join('');
+}
+
+function addToCart(productId){
+const product=products.find(p=>p.id===productId);
+if(!product)return;
+const existing=cart.find(item=>item.id===productId);
+if(existing)existing.qty++;
+else cart.push({id:productId,qty:1});
+saveCart();
+updateCartUI();
+showToast(currentLang==='ar'?'تمت الإضافة!':'Added!',currentLang==='ar'?`${product.nameAr} أضيفت إلى السلة`:`${product.nameEn} added to cart`,'success');
+}
+
+function removeFromCart(productId){
+cart=cart.filter(item=>item.id!==productId);
+saveCart();
+updateCartUI();
+}
+
+function updateQty(productId,delta){
+const item=cart.find(i=>i.id===productId);
+if(!item)return;
+item.qty+=delta;
+if(item.qty<=0){removeFromCart(productId);return;}
+saveCart();
+updateCartUI();
+}
+
+function saveCart(){localStorage.setItem('roselingerie_cart',JSON.stringify(cart));}
+
+function updateCartUI(){
+const count=cart.reduce((sum,item)=>sum+item.qty,0);
+document.getElementById('cartCount').textContent=count;
+const itemsContainer=document.getElementById('cartItems');
+const footer=document.getElementById('cartFooter');
+if(cart.length===0){
+itemsContainer.innerHTML=`<div class="cart-empty"><i class="fas fa-shopping-bag"></i><h3>${currentLang==='ar'?'سلة التسوق فارغة':'Cart is Empty'}</h3><p>${currentLang==='ar'?'أضيفي بعض المنتجات إلى السلة':'Add some products to your cart'}</p></div>`;
+footer.style.display='none';
+return;
+}
+let total=0;
+itemsContainer.innerHTML=cart.map(item=>{
+const product=products.find(p=>p.id===item.id);
+total+=product.price*item.qty;
+return `
+<div class="cart-item">
+<div class="cart-item-img"><i class="fas ${product.icon}"></i></div>
+<div class="cart-item-details">
+<div class="cart-item-name">${currentLang==='ar'?product.nameAr:product.nameEn}</div>
+<div class="cart-item-price">${product.price} ${currentLang==='ar'?'$':'USD'}</div>
+<div class="cart-item-qty">
+<button class="qty-btn" onclick="updateQty(${product.id},-1)">-</button>
+<span class="qty-value">${item.qty}</span>
+<button class="qty-btn" onclick="updateQty(${product.id},1)">+</button>
+</div>
+</div>
+<button class="cart-item-remove" onclick="removeFromCart(${product.id})"><i class="fas fa-trash"></i></button>
+</div>`;
+}).join('');
+footer.style.display='block';
+document.getElementById('cartTotal').textContent=`${total} ${currentLang==='ar'?'$':'USD'}`;
+}
+
+function toggleCart(){
+document.getElementById('cartOverlay').classList.toggle('active');
+document.getElementById('cartSidebar').classList.toggle('active');
+document.body.style.overflow=document.getElementById('cartSidebar').classList.contains('active')?'hidden':'';
+}
+
+function toggleWishlist(productId,event){
+event.stopPropagation();
+const index=wishlist.indexOf(productId);
+if(index>-1){
+wishlist.splice(index,1);
+showToast(currentLang==='ar'?'تمت الإزالة':'Removed',currentLang==='ar'?'تمت إزالة المنتج من المفضلة':'Product removed from wishlist','success');
+}else{
+wishlist.push(productId);
+showToast(currentLang==='ar'?'تمت الإضافة!':'Added!',currentLang==='ar'?'أضيفت إلى المفضلة':'Added to wishlist','success');
+}
+localStorage.setItem('roselingerie_wishlist',JSON.stringify(wishlist));
+renderProducts();
+}
+
+function sendWhatsAppOrder(event){
+event.preventDefault();
+const name=document.getElementById('contactName').value.trim();
+const phone=document.getElementById('contactPhone').value.trim();
+const city=document.getElementById('contactCity').value;
+const notes=document.getElementById('contactNotes').value.trim();
+if(!name||!phone||!city){
+showToast(currentLang==='ar'?'خطأ':'Error',currentLang==='ar'?'يرجى ملء جميع الحقول المطلوبة':'Please fill all required fields','error');
+return;
+}
+let message=currentLang==='ar'?`مرحباً! أنا ${name} من ${city}.\nرقمي: ${phone}\n\nأرغب في الطلب من روز لانجري.`:`Hello! I'm ${name} from ${city}.\nMy number: ${phone}\n\nI'd like to order from Rose Lingerie.`;
+if(notes)message+=currentLang==='ar'?`\n\nملاحظات: ${notes}`:`\n\nNotes: ${notes}`;
+if(cart.length>0){
+message+=currentLang==='ar'?'\n\nمنتجاتي في السلة:':'\\n\\nMy cart items:';
+cart.forEach(item=>{
+const p=products.find(prod=>prod.id===item.id);
+message+=`\n- ${currentLang==='ar'?p.nameAr:p.nameEn} (${item.qty}x) = ${p.price*item.qty} ${currentLang==='ar'?'$':'USD'}`;
+});
+const total=cart.reduce((sum,item)=>{const p=products.find(prod=>prod.id===item.id);return sum+p.price*item.qty;},0);
+message+=`\n\n${currentLang==='ar'?'الإجمالي':'Total'}: ${total} ${currentLang==='ar'?'$':'USD'}`;
+}
+window.open(`https://wa.me/963983849307?text=${encodeURIComponent(message)}`,'_blank');
+}
+
+function sendCartWhatsApp(event){
+event.preventDefault();
+if(cart.length===0){showToast(currentLang==='ar'?'خطأ':'Error',currentLang==='ar'?'السلة فارغة':'Cart is empty','error');return;}
+let message=currentLang==='ar'?'مرحباً! أرغب في إتمام طلبي من روز لانجري:\n\n':'Hello! I would like to complete my order from Rose Lingerie:\n\n';
+cart.forEach(item=>{
+const p=products.find(prod=>prod.id===item.id);
+message+=`- ${currentLang==='ar'?p.nameAr:p.nameEn} (${item.qty}x) = ${p.price*item.qty} ${currentLang==='ar'?'$':'USD'}\n`;
+});
+const total=cart.reduce((sum,item)=>{const p=products.find(prod=>prod.id===item.id);return sum+p.price*item.qty;},0);
+message+=`\n${currentLang==='ar'?'الإجمالي':'Total'}: ${total} ${currentLang==='ar'?'$':'USD'}`;
+window.open(`https://wa.me/963983849307?text=${encodeURIComponent(message)}`,'_blank');
+}
+
+function showToast(title,message,type){
+const container=document.getElementById('toastContainer');
+const toast=document.createElement('div');
+toast.className=`toast ${type}`;
+toast.innerHTML=`<div class="toast-icon"><i class="fas ${type==='success'?'fa-check':'fa-exclamation-circle'}"></i></div><div class="toast-content"><h4>${title}</h4><p>${message}</p></div>`;
+container.appendChild(toast);
+setTimeout(()=>toast.remove(),3000);
+}
+
+function showSection(sectionId){
+const section=document.getElementById(sectionId);
+if(section)section.scrollIntoView({behavior:'smooth',block:'start'});
+document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+const activeLink=document.querySelector(`.nav-links a[href="#${sectionId}"]`);
+if(activeLink)activeLink.classList.add('active');
+}
+
+function filterProducts(category){
+currentFilter=category;
+showSection('products');
+document.querySelectorAll('.filter-btn').forEach(btn=>btn.classList.toggle('active',btn.dataset.filter===category));
+renderProducts();
+}
+
+function toggleMobileMenu(){document.getElementById('mobileMenu').classList.toggle('active');}
+</script>
+</body>
+</html>
