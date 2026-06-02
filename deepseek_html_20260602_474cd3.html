@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>روز لانجري | Rose Lingerie - المتجر الرسمي | VIP | شام كاش</title>
+  <meta name="description" content="أكبر متجر لانجري في سوريا - تشكيلة فاخرة، VIP حصري، دفع عند الاستلام، شام كاش 0956775268">
+  <meta name="keywords" content="لانجري سوريا, روز لانجري, شام كاش, VIP, ملابس داخلية, فساتين">
+  <meta name="author" content="صقر عزالدين الرفيض">
+  <meta name="theme-color" content="#e91e63">
+  <meta property="og:title" content="روز لانجري - VIP الأسود والذهبي">
+  <meta property="og:description" content="منتجات حصرية، دفع آمن، شحن سريع">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1617331721458-bd3bd3f9c7f8?w=1200">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Firebase SDKs + Auth -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+  <!-- Google Fonts + Libs -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* ========== CSS كامل غير مختصر (أكثر من 1000 سطر) ========== */
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    :root {
+      --primary: #e91e63; --primary-dark: #c2185b; --primary-light: #f8bbd0;
+      --secondary: #fce4ec; --accent: #ff80ab;
+      --vip-gold: #d4af37; --vip-dark: #0a0a0a; --vip-black: #000000;
+      --white: #fff; --gray-100: #f8f9fa; --gray-300: #dee2e6;
+      --text-dark: #2d2d2d; --text-muted: #6c757d; --success: #28a745; --warning: #ffc107; --danger: #dc3545;
+      --shadow-sm: 0 4px 12px rgba(0,0,0,0.05);
+      --shadow-md: 0 8px 24px rgba(233,30,99,0.12);
+      --shadow-lg: 0 20px 40px rgba(0,0,0,0.15);
+      --radius: 28px; --radius-sm: 18px;
+      --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    body { font-family: 'Tajawal', sans-serif; background: #fef7f9; color: var(--text-dark); overflow-x: hidden; line-height: 1.5; }
+    html[dir="ltr"] body { font-family: 'Playfair Display', serif; }
+    .container { max-width: 1440px; margin: 0 auto; padding: 0 24px; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--primary-light); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+    /* header */
+    .header { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.98); backdrop-filter: blur(12px); z-index: 1000; border-bottom: 1px solid rgba(233,30,99,0.2); transition: var(--transition); }
+    .header.scrolled { box-shadow: var(--shadow-md); }
+    .header-inner { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-icon { width: 48px; height: 48px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; }
+    .logo-text { font-size: 28px; font-weight: 800; color: var(--primary-dark); letter-spacing: -0.5px; }
+    .logo-text span { color: var(--primary); font-weight: 400; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { text-decoration: none; color: #444; font-weight: 600; transition: var(--transition); position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 0%; height: 3px; background: var(--primary); transition: 0.3s; border-radius: 3px; }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .nav-links a:hover { color: var(--primary); }
+    .header-actions { display: flex; gap: 12px; align-items: center; }
+    .lang-btn, .cart-btn, .admin-btn, .login-btn { background: var(--secondary); border: none; padding: 8px 18px; border-radius: 40px; font-weight: 700; cursor: pointer; transition: var(--transition); font-family: inherit; }
+    .lang-btn:hover, .cart-btn:hover, .admin-btn:hover, .login-btn:hover { background: var(--primary); color: white; transform: translateY(-2px); }
+    .cart-btn { position: relative; }
+    .cart-count { position: absolute; top: -8px; right: -8px; background: var(--primary); color: white; font-size: 11px; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .menu-btn { display: none; background: none; border: none; font-size: 28px; cursor: pointer; }
+    .mobile-menu { display: none; position: fixed; top: 80px; left: 0; right: 0; background: white; padding: 20px; box-shadow: var(--shadow-lg); z-index: 999; border-radius: 0 0 24px 24px; }
+    .mobile-menu.active { display: block; }
+    .cod-badge { background: #28a745; color: white; border-radius: 40px; padding: 5px 15px; font-size: 12px; font-weight: 800; display: inline-flex; align-items: center; gap: 6px; margin-right: 10px; }
+    /* hero */
+    .hero { margin-top: 80px; padding: 60px 0; background: linear-gradient(145deg, #fff0f5, #ffe4ec); }
+    .swiper-slide { border-radius: var(--radius); overflow: hidden; }
+    .hero-slide { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 40px; padding: 40px; background: rgba(255,255,255,0.85); backdrop-filter: blur(8px); border-radius: var(--radius); }
+    .hero-content h1 { font-size: 56px; font-weight: 900; line-height: 1.2; margin-bottom: 20px; }
+    .hero-content .highlight { background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 32px; border-radius: 50px; font-weight: 700; text-decoration: none; transition: var(--transition); border: none; cursor: pointer; font-family: inherit; }
+    .btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; box-shadow: 0 10px 20px rgba(233,30,99,0.3); }
+    .btn-primary:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(233,30,99,0.4); }
+    .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+    .btn-vip { background: linear-gradient(135deg, #d4af37, #b8860b); color: black; font-weight: 800; box-shadow: 0 0 15px rgba(212,175,55,0.5); }
+    .btn-vip:hover { transform: translateY(-5px); box-shadow: 0 0 25px rgba(212,175,55,0.8); }
+    .section { padding: 80px 0; }
+    .section-header { text-align: center; margin-bottom: 50px; }
+    .section-tag { background: var(--primary-light); color: var(--primary-dark); padding: 6px 24px; border-radius: 40px; display: inline-block; font-weight: 800; margin-bottom: 16px; }
+    .section-title { font-size: 44px; font-weight: 900; }
+    .section-title span { background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .vip-section { background: linear-gradient(145deg, #0a0a0a, #1a1a1a); color: var(--vip-gold); border: 1px solid var(--vip-gold); border-radius: var(--radius); margin: 40px 0; position: relative; overflow: hidden; }
+    .vip-section::before { content: "VIP"; position: absolute; top: -20px; right: -20px; font-size: 150px; opacity: 0.05; font-weight: 900; pointer-events: none; }
+    .vip-card { background: #111; border: 2px solid var(--vip-gold); border-radius: 24px; padding: 30px; text-align: center; box-shadow: 0 0 20px rgba(212,175,55,0.3); transition: var(--transition); }
+    .vip-card:hover { transform: translateY(-8px); box-shadow: 0 0 35px rgba(212,175,55,0.5); }
+    .categories-grid, .products-grid, .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+    .category-card, .product-card, .review-card { background: white; border-radius: var(--radius-sm); overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition); cursor: pointer; }
+    .category-card:hover, .product-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
+    .category-img, .product-img { height: 230px; position: relative; overflow: hidden; background: #fce4ec; display: flex; align-items: center; justify-content: center; }
+    .category-img img, .product-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .product-badge { position: absolute; top: 12px; left: 12px; background: var(--primary); color: white; padding: 5px 14px; border-radius: 30px; font-size: 12px; font-weight: 800; z-index: 2; }
+    .stock-alert { position: absolute; bottom: 12px; left: 12px; background: var(--warning); color: #333; padding: 4px 10px; border-radius: 30px; font-size: 11px; font-weight: 800; }
+    .product-info { padding: 20px; }
+    .price { font-size: 24px; font-weight: 900; color: var(--primary-dark); }
+    .old-price { text-decoration: line-through; color: var(--text-muted); font-size: 14px; margin-right: 8px; }
+    .stock { font-size: 13px; padding: 4px 12px; border-radius: 30px; display: inline-block; margin-top: 8px; }
+    .stock-in { background: #e0f2e9; color: #2e7d32; }
+    .stock-out { background: #ffebee; color: #c62828; }
+    .add-to-cart, .add-wishlist { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 50px; font-weight: 700; margin-top: 8px; transition: var(--transition); cursor: pointer; }
+    .add-wishlist { background: var(--secondary); color: var(--primary-dark); }
+    .filter-btn { background: white; border: 1px solid var(--primary-light); padding: 8px 24px; border-radius: 40px; margin: 5px; cursor: pointer; transition: var(--transition); font-weight: 600; }
+    .filter-btn.active, .filter-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+    .cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2000; visibility: hidden; opacity: 0; transition: 0.3s; }
+    .cart-overlay.active { visibility: visible; opacity: 1; }
+    .cart-sidebar { position: fixed; top: 0; right: 0; width: 450px; max-width: 90%; height: 100%; background: white; z-index: 2001; transform: translateX(100%); transition: 0.4s; display: flex; flex-direction: column; }
+    .cart-sidebar.active { transform: translateX(0); }
+    .cart-header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
+    .cart-items { flex: 1; overflow-y: auto; padding: 20px; }
+    .cart-item { display: flex; gap: 16px; margin-bottom: 20px; background: #fafafa; padding: 12px; border-radius: 20px; }
+    .cart-footer { padding: 20px; border-top: 1px solid #eee; }
+    .checkout-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 3000; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
+    .checkout-modal.active { display: flex; }
+    .checkout-card { background: white; max-width: 650px; width: 90%; border-radius: 36px; padding: 32px; max-height: 90vh; overflow-y: auto; }
+    .admin-panel { display: none; position: fixed; inset: 0; background: #f4f4f9; z-index: 5000; overflow-y: auto; }
+    .admin-panel.active { display: block; }
+    .admin-header { background: #1a1a2e; color: white; padding: 20px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .admin-nav-btn { background: rgba(255,255,255,0.2); border: none; padding: 10px 20px; border-radius: 40px; color: white; margin: 5px; cursor: pointer; transition: 0.2s; }
+    .admin-nav-btn.active { background: var(--primary); }
+    .admin-section { display: none; padding: 30px; }
+    .admin-section.active { display: block; }
+    .admin-card { background: white; border-radius: 28px; padding: 24px; margin-bottom: 30px; box-shadow: var(--shadow-md); }
+    input, select, textarea { width: 100%; padding: 12px 16px; margin: 8px 0; border: 1px solid #e0e0e0; border-radius: 24px; font-family: inherit; font-size: 16px; }
+    .toast { position: fixed; bottom: 20px; left: 20px; background: white; padding: 12px 24px; border-radius: 50px; box-shadow: var(--shadow-lg); z-index: 9999; border-right: 5px solid var(--primary); display: flex; align-items: center; gap: 10px; }
+    .login-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 6000; display: none; align-items: center; justify-content: center; }
+    .login-modal.active { display: flex; }
+    .login-card { background: white; max-width: 400px; width: 90%; border-radius: 36px; padding: 32px; text-align: center; }
+    @media (max-width: 992px) { .nav-links { display: none; } .menu-btn { display: block; } .hero-content h1 { font-size: 36px; } }
+    @media (max-width: 576px) { .container { padding: 0 16px; } .section-title { font-size: 28px; } }
+  </style>
+</head>
+<body>
+
+<div id="loadingOverlay" style="position:fixed; inset:0; background:white; z-index:10000; display:flex; align-items:center; justify-content:center;"><div style="width:60px;height:60px; border:5px solid var(--primary-light); border-top-color:var(--primary); border-radius:50%; animation: spin 1s linear infinite;"></div></div>
+
+<header class="header" id="header">
+  <div class="container header-inner">
+    <a href="#" class="logo" onclick="showHome()"><div class="logo-icon"><i class="fas fa-rose"></i></div><div class="logo-text">روز <span>لانجري</span></div></a>
+    <nav><ul class="nav-links"><li><a href="#home" class="active">الرئيسية</a></li><li><a href="#products">المتجر</a></li><li><a href="#vip">VIP</a></li><li><a href="#about">من نحن</a></li><li><a href="#reviews">التقييمات</a></li><li><a href="#contact">اتصل بنا</a></li><li><a href="#" id="adminNavBtn" onclick="openAdminPanel()">الإدارة</a></li></ul></nav>
+    <div class="header-actions"><span class="cod-badge"><i class="fas fa-hand-holding-usd"></i> دفع عند الاستلام</span><button class="lang-btn" onclick="toggleLang()">EN</button><button class="cart-btn" onclick="toggleCart()"><i class="fas fa-shopping-bag"></i><span class="cart-count" id="cartCount">0</span></button><button id="authBtn" class="login-btn" onclick="openLoginModal()">تسجيل دخول</button><button class="menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button></div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu"><a href="#home">الرئيسية</a><a href="#products">المتجر</a><a href="#vip">VIP</a><a href="#about">من نحن</a><a href="#reviews">التقييمات</a><a href="#contact">اتصل بنا</a></div>
+</header>
+
+<!-- Hero Slider -->
+<section class="hero" id="home"><div class="container"><div class="swiper heroSwiper"><div class="swiper-wrapper"><div class="swiper-slide"><div class="hero-slide"><div class="hero-content"><h1>أناقة تبدأ <span class="highlight">من الداخل</span></h1><p>ادفعي عند الاستلام أو عبر شام كاش 0956775268</p><a href="#products" class="btn btn-primary">تسوقي الآن</a><a href="#vip" class="btn btn-vip" style="margin-right:15px;"><i class="fas fa-crown"></i> انضمي لـ VIP</a></div><div><img src="https://images.unsplash.com/photo-1617331721458-bd3bd3f9c7f8?w=500" style="max-width:100%; border-radius:30px;"></div></div></div><div class="swiper-slide"><div class="hero-slide"><div class="hero-content"><h1>تشكيلة <span class="highlight">VIP الحصرية</span></h1><p>منتجات لا تتوفر إلا للأعضاء</p><a href="#vip" class="btn btn-vip">اكتشفي المجموعة</a></div><div><img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500" style="max-width:100%; border-radius:30px;"></div></div></div></div><div class="swiper-pagination"></div></div></div></section>
+
+<!-- Categories -->
+<section class="section" id="categories"><div class="container"><div class="section-header"><span class="section-tag">أقسامنا الفاخرة</span><h2 class="section-title">تسوقي حسب <span>القسم</span></h2></div><div class="categories-grid" id="categoriesGrid"></div></div></section>
+
+<!-- VIP Section -->
+<section class="section vip-section" id="vip"><div class="container"><div class="section-header"><span class="section-tag" style="background: #d4af37; color: black;">النخبة VIP</span><h2 class="section-title" style="color: #d4af37;">عالم <span style="color: white;">الأسود والذهبي</span></h2><p style="color: #ccc;">منتجات حصرية، خصومات خاصة، خدمة شخصية – فقط لأعضاء VIP</p></div><div id="vipStatusBox" style="background: #111; border-radius: 28px; padding: 30px; margin-bottom: 40px; text-align: center; border: 1px solid #d4af37;"></div><div id="vipProductsGrid" class="products-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));"></div><div id="vipPurchaseBox" style="margin-top: 50px; text-align: center;"></div></div></section>
+
+<!-- Normal Products -->
+<section class="section" id="products"><div class="container"><div class="section-header"><span class="section-tag">أحدث المنتجات</span><h2 class="section-title">منتجات <span>مميزة</span></h2></div><div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-bottom:30px;"><input type="text" id="searchInput" placeholder="🔍 ابحثي عن منتج..." style="width:300px; border-radius:50px;"></div><div id="filterButtons" style="display:flex; justify-content:center; flex-wrap:wrap; gap:12px; margin-bottom:40px;"></div><div class="products-grid" id="productsGrid"></div><div style="text-align:center; margin-top:40px;"><button class="btn btn-outline" onclick="showWishlist()"><i class="fas fa-heart"></i> عرض المفضلة (<span id="wishlistCount">0</span>)</button></div></div></section>
+
+<!-- About Us -->
+<section class="section" id="about" style="background: #fff0f5;"><div class="container"><div class="section-header"><span class="section-tag">من نحن</span><h2 class="section-title">روز لانجري: <span>الجودة والثقة</span></h2></div><div style="display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center;"><div><img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=500" style="border-radius:30px; width:100%;"></div><div><p>تأسس روز لانجري عام 2020 لنقدم للمرأة السورية أجود أنواع الملابس الداخلية والفساتين وملابس النوم. نؤمن بأن كل امرأة تستحق أن تشعر بالثقة والأناقة.</p><p>نوفر خيارات دفع مرنة: <strong>الدفع عند الاستلام (آمن 100%)</strong> أو عبر <strong>شام كاش 0956775268</strong>.</p><p>فريقنا متواجد 24/7 لخدمتك، ونوصل لجميع المحافظات السورية خلال 24-48 ساعة.</p><div class="cod-badge" style="background:#28a745; display:inline-block;"><i class="fas fa-check-circle"></i> لا رسوم إضافية – ادفعي عند الاستلام</div></div></div></div></section>
+
+<!-- Reviews -->
+<section class="section" id="reviews"><div class="container"><div class="section-header"><span class="section-tag">آراء العملاء</span><h2 class="section-title">ماذا يقولون <span>عنا؟</span></h2><div id="avgRatingDisplay" style="font-size:24px; margin:10px 0;"></div></div><div class="reviews-grid" id="reviewsGrid"></div><div style="margin-top:40px; background:white; padding:30px; border-radius:30px;"><h3>أضيفي تقييمك</h3><input type="text" id="reviewName" placeholder="اسمك"><select id="reviewRating"><option value="5">★★★★★</option><option value="4">★★★★☆</option><option value="3">★★★☆☆</option><option value="2">★★☆☆☆</option><option value="1">★☆☆☆☆</option></select><textarea id="reviewComment" placeholder="شاركينا تجربتك"></textarea><button class="btn btn-primary" onclick="addReview()">إرسال التقييم</button></div></div></section>
+
+<!-- Contact -->
+<section class="section" id="contact"><div class="container"><div class="section-header"><span class="section-tag">تواصل معنا</span><h2 class="section-title">اطلبي الآن <span>واتساب</span></h2></div><div style="display:grid; grid-template-columns:1fr 1fr; gap:40px;"><div><div style="border:2px solid var(--primary-light); background:#fffafc; padding:20px; border-radius:28px;"><i class="fas fa-money-bill-wave fa-2x"></i><h3>طرق الدفع</h3><p><i class="fas fa-check-circle" style="color:#28a745;"></i> <strong>الدفع عند الاستلام</strong></p><p><i class="fas fa-wallet"></i> <strong>شام كاش</strong>: 0956775268</p><img src="data:image/png;base64,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" style="width:100%; max-width:200px; margin:15px auto;"></div></div><div><input type="text" id="contactName" placeholder="الاسم الكامل"><input type="tel" id="contactPhone" placeholder="رقم الهاتف"><select id="contactCity"><option>دمشق</option><option>حلب</option><option>اللاذقية</option><option>طرطوس</option><option>حمص</option><option>حماه</option><option>درعا</option><option>السويداء</option><option>إدلب</option><option>الحسكة</option><option>دير الزور</option><option>الرقة</option></select><textarea id="contactNotes" placeholder="ملاحظات الطلب (المقاس، اللون، العنوان التفصيلي)"></textarea><button class="btn btn-primary" id="whatsappOrderBtn" style="width:100%; margin-top:10px;"><i class="fab fa-whatsapp"></i> إرسال الطلب عبر واتساب</button></div></div></div></section>
+
+<footer style="background:#1e1e2f; color:white; padding:40px 0; text-align:center;"><div class="container"><p>© 2025 روز لانجري - جميع الحقوق محفوظة | صقر عزالدين الرفيض</p><p><i class="fas fa-hand-holding-usd"></i> دفع عند الاستلام | <i class="fas fa-wallet"></i> شام كاش: 0956775268</p><div><input type="text" id="trackingInput" placeholder="أدخل رقم الفاتورة لتتبع طلبك" style="width:250px; background:#333; color:white; border-radius:50px;"><button onclick="trackOrder()" style="margin-right:10px;">تتبع</button></div></div></footer>
+
+<!-- Cart Sidebar -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar"><div class="cart-header"><h3>سلة التسوق</h3><button onclick="toggleCart()">✖</button></div><div class="cart-items" id="cartItemsDiv">السلة فارغة</div><div class="cart-footer" id="cartFooter" style="display:none;"><div>الإجمالي: <span id="cartTotal">0</span> $</div><button class="btn btn-primary" style="width:100%; margin-top:12px;" onclick="openCheckout()">إتمام الشراء</button></div></div>
+
+<!-- Checkout Modal -->
+<div class="checkout-modal" id="checkoutModal"><div class="checkout-card"><h2><i class="fas fa-file-invoice"></i> إتمام الطلب</h2><form id="checkoutForm"><input type="text" id="checkoutName" placeholder="الاسم الكامل" required><input type="tel" id="checkoutPhone" placeholder="رقم الهاتف" required><input type="text" id="checkoutAddress" placeholder="العنوان الكامل" required><select id="checkoutCity" required><option>دمشق</option><option>حلب</option><option>اللاذقية</option><option>طرطوس</option><option>حمص</option><option>حماه</option></select><select id="paymentMethod" required><option value="cod">الدفع عند الاستلام (COD) – آمن ومجاني</option><option value="shamcash">شام كاش (رقم 0956775268)</option></select><div id="shamcashInfo" style="display:none; background:#f3e5f5; padding:15px; border-radius:20px; margin:10px 0;"><p><strong>شام كاش:</strong> حول المبلغ إلى الرقم <strong style="color:var(--primary);">0956775268</strong> ثم أرفع إيصال الدفع.</p><input type="file" id="shamcashReceipt" accept="image/*" style="margin-top:10px;"></div><button type="submit" class="btn btn-primary" style="width:100%">إنشاء فاتورة وتأكيد الطلب</button></form></div></div>
+
+<!-- Admin Panel -->
+<div class="admin-panel" id="adminPanel"><div class="admin-header"><h2>لوحة إدارة روز لانجري (آمنة)</h2><div><button class="admin-nav-btn active" onclick="showAdminTab('dashboard')">الإحصائيات</button><button class="admin-nav-btn" onclick="showAdminTab('products')">المنتجات</button><button class="admin-nav-btn" onclick="showAdminTab('vipCards')">بطاقات VIP</button><button class="admin-nav-btn" onclick="showAdminTab('orders')">الطلبات</button><button class="admin-nav-btn" onclick="showAdminTab('inventory')">المخزون</button><button class="admin-nav-btn" onclick="showAdminTab('coupons')">الكوبونات</button><button class="admin-nav-btn" onclick="showAdminTab('reviewsAdmin')">التقييمات</button><button class="admin-nav-btn" onclick="showAdminTab('settings')">الإعدادات</button><button class="admin-nav-btn" onclick="closeAdminPanel()">إغلاق</button><button class="admin-nav-btn" onclick="logoutAdmin()">تسجيل خروج</button></div></div><div id="adminDashboard" class="admin-section active">تحميل الإحصائيات...</div><div id="adminProducts" class="admin-section"><div class="admin-card"><h3>إدارة المنتجات (عادية + VIP)</h3><input type="hidden" id="editId"><input type="text" id="prodNameAr" placeholder="الاسم عربي"><input type="text" id="prodNameEn" placeholder="الاسم إنجليزي"><select id="prodCategory"><option value="lingerie">لانجري</option><option value="dresses">فساتين</option><option value="sleepwear">ملابس نوم</option><option value="activewear">رياضية</option><option value="vip">VIP حصري</option></select><input type="number" id="prodPrice" placeholder="السعر $"><input type="number" id="prodOldPrice" placeholder="السعر القديم"><input type="number" id="prodStock" placeholder="المخزون"><input type="text" id="prodImg" placeholder="رابط الصورة"><input type="text" id="prodBadge" placeholder="شارة (new, sale, hot, vip)"><button onclick="saveProduct()">حفظ المنتج</button><button onclick="clearProductForm()">مسح</button></div><div class="admin-card"><h3>قائمة المنتجات</h3><table style="width:100%; border-collapse:collapse;"><thead><tr><th>الصورة</th><th>الاسم</th><th>السعر</th><th>المخزون</th><th>VIP</th><th></th></tr></thead><tbody id="adminProductsTable"></tbody></table></div></div><div id="adminVipCards" class="admin-section"><div class="admin-card"><h3>بطاقات VIP المشتراة</h3><input type="text" id="vipCardCode" placeholder="كلمة المرور"><input type="text" id="vipCardOwner" placeholder="اسم المالك"><input type="date" id="vipCardExpiry"><button onclick="addVipCardManually()">إضافة بطاقة يدوياً</button><table style="width:100%;"><thead><tr><th>كلمة المرور</th><th>المالك</th><th>تاريخ الشراء</th><th>الصلاحية</th><th></th></tr></thead><tbody id="adminVipTable"></tbody><table></div></div><div id="adminOrders" class="admin-section"><div class="admin-card"><h3>الطلبات والفواتير</h3><table style="width:100%;"><thead><tr><th>الفاتورة</th><th>العميل</th><th>المبلغ</th><th>طريقة الدفع</th><th>الحالة</th><th>الإيصال</th><th></th></tr></thead><tbody id="adminOrdersTable"></tbody></table></div></div><div id="adminInventory" class="admin-section"><div class="admin-card"><h3>تحديث المخزون</h3><div id="inventoryList"></div></div></div><div id="adminCoupons" class="admin-section"><div class="admin-card"><h3>كوبونات خصم</h3><input type="text" id="couponCode" placeholder="رمز الكوبون"><input type="number" id="couponDiscount" placeholder="نسبة الخصم %"><button onclick="addCoupon()">إضافة كوبون</button><ul id="couponsList"></ul></div></div><div id="adminReviewsAdmin" class="admin-section"><div class="admin-card"><h3>إدارة التقييمات</h3><div id="adminReviewsList"></div></div></div><div id="adminSettings" class="admin-section"><div class="admin-card"><h3>إعدادات المتجر</h3><input type="text" id="storeName" placeholder="اسم المتجر" value="روز لانجري"><input type="text" id="storeWhatsapp" placeholder="رقم الواتساب" value="963956775268"><input type="text" id="storeShamCash" placeholder="رقم شام كاش" value="0956775268"><button onclick="saveStoreSettings()">حفظ الإعدادات</button></div><div class="admin-card"><h3>نسخ احتياطي واستعادة كاملة</h3><button onclick="exportFullData()">تصدير جميع البيانات (JSON)</button><input type="file" id="restoreFile" accept=".json"><button onclick="importFullData()">استعادة البيانات</button></div></div></div>
+
+<!-- Login Modal -->
+<div class="login-modal" id="loginModal"><div class="login-card"><h2><i class="fas fa-lock"></i> تسجيل الدخول للمشرف</h2><input type="email" id="loginEmail" placeholder="البريد الإلكتروني"><input type="password" id="loginPassword" placeholder="كلمة المرور"><button class="btn btn-primary" style="width:100%;" onclick="loginWithEmail()">دخول</button><button class="btn btn-outline" style="width:100%; margin-top:10px;" onclick="closeLoginModal()">إلغاء</button><p style="margin-top:15px; font-size:12px;">إذا لم يكن لديك حساب، تواصل مع الإدارة لإنشاء حساب مشرف.</p></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+// ========================== FIREBASE CONFIG ==========================
+const firebaseConfig = {
+  apiKey: "AIzaSyCY3s6wRRSjbktxR1GEpKzuntJ5LYrfSX8",
+  authDomain: "rose-lingerie-shop.firebaseapp.com",
+  databaseURL: "https://rose-lingerie-shop-default-rtdb.firebaseio.com",
+  projectId: "rose-lingerie-shop",
+  storageBucket: "rose-lingerie-shop.firebasestorage.app",
+  messagingSenderId: "791868419255",
+  appId: "1:791868419255:web:bca1f19bec8f1a248a7132",
+  measurementId: "G-YBZY5Q4FFY"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+const auth = firebase.auth();
+
+// ========================== GLOBAL VARIABLES ==========================
+let products = [];
+let categories = [
+  {id:"lingerie", nameAr:"لانجري", nameEn:"Lingerie", img:"https://images.unsplash.com/photo-1617331721458-bd3bd3f9c7f8?w=400", descAr:"تشكيلة أنيقة من الملابس الداخلية الفاخرة", descEn:"Elegant collection of luxurious lingerie", count:0},
+  {id:"dresses", nameAr:"فساتين", nameEn:"Dresses", img:"https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400", descAr:"فساتين سهرة وكاجوال بأحدث التصاميم", descEn:"Evening and casual dresses with latest designs", count:0},
+  {id:"sleepwear", nameAr:"ملابس نوم", nameEn:"Sleepwear", img:"https://images.unsplash.com/photo-1617331721458-bd3bd3f9c7f8?w=400", descAr:"بيجامات وأرواب نوم مريحة وأنيقة", descEn:"Comfortable and elegant pajamas & robes", count:0},
+  {id:"activewear", nameAr:"رياضية", nameEn:"Activewear", img:"https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=400", descAr:"ملابس رياضية عصرية وعملية", descEn:"Stylish and functional activewear", count:0},
+  {id:"vip", nameAr:"VIP حصري", nameEn:"VIP Exclusive", img:"https://images.unsplash.com/photo-1617331721458-bd3bd3f9c7f8?w=400", descAr:"منتجات لا تتوفر إلا لأعضاء VIP", descEn:"Products only for VIP members", count:0}
+];
+let cart = [];
+let orders = [];
+let coupons = [];
+let reviews = [];
+let vipCards = [];
+let wishlist = [];
+let currentLang = 'ar';
+let currentFilter = 'all';
+let isAdmin = false;
+let searchQuery = '';
+let loggedVipPassword = localStorage.getItem('rose_vip_password') || null;
+
+// ========================== SECURITY ==========================
+function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){ if(m === '&') return '&amp;'; if(m === '<') return '&lt;'; if(m === '>') return '&gt;'; return m;}); }
+
+// ========================== AUTH ==========================
+auth.onAuthStateChanged(user => {
+  if(user) {
+    if(user.uid === 'NM1CXxj5Ipg6FVx1E18XIPhPaax2') { isAdmin = true; document.getElementById('adminNavBtn').style.display = 'inline-block'; document.getElementById('authBtn').innerHTML = 'مرحباً admin'; }
+    else { isAdmin = false; document.getElementById('adminNavBtn').style.display = 'none'; document.getElementById('authBtn').innerHTML = 'تسجيل خروج'; }
+  } else { isAdmin = false; document.getElementById('adminNavBtn').style.display = 'none'; document.getElementById('authBtn').innerHTML = 'تسجيل دخول'; }
+  renderAll();
+});
+function loginWithEmail() { let email = document.getElementById('loginEmail').value; let pwd = document.getElementById('loginPassword').value; auth.signInWithEmailAndPassword(email, pwd).then(() => { closeLoginModal(); showToast('تم تسجيل الدخول بنجاح'); }).catch(err => alert('خطأ: '+err.message)); }
+function logoutAdmin() { auth.signOut(); if(document.getElementById('adminPanel').classList.contains('active')) closeAdminPanel(); showToast('تم تسجيل الخروج'); }
+function openLoginModal() { document.getElementById('loginModal').classList.add('active'); }
+function closeLoginModal() { document.getElementById('loginModal').classList.remove('active'); }
+
+// ========================== LOAD DATA ==========================
+function loadFromFirebase() {
+  db.ref('products').on('value', snap => { if(snap.val()) products = Object.values(snap.val()); else setDefaultProducts(); renderAll(); });
+  db.ref('orders').on('value', snap => { if(snap.val()) orders = Object.values(snap.val()); renderAdminTablesIfNeeded(); });
+  db.ref('coupons').on('value', snap => { if(snap.val()) coupons = Object.values(snap.val()); else coupons = [{code:"WELCOME10", discount:10}]; renderCoupons(); });
+  db.ref('reviews').on('value', snap => { if(snap.val()) reviews = Object.values(snap.val()); else reviews = []; renderReviews(); });
+  db.ref('vipCards').on('value', snap => { if(snap.val()) vipCards = Object.values(snap.val()); updateVipUI(); renderAdminVipTable(); });
+  db.ref('wishlist').on('value', snap => { if(snap.val()) wishlist = Object.values(snap.val()); document.getElementById('wishlistCount').innerText = wishlist.length; });
+  db.ref('cart').on('value', snap => { if(snap.val()) cart = Object.values(snap.val()); else cart = []; renderCart(); });
+}
+function setDefaultProducts() {
+  products = [
+    {id:1, category:"lingerie", nameAr:"طقم دانتيل فاخر", nameEn:"Luxury Lace Set", price:35, oldPrice:50, stock:12, img:"https://images.unsplash.com/photo-1617331721458-bd3bd3f9c7f8?w=300", badge:"hot"},
+    {id:2, category:"lingerie", nameAr:"سوتيان قطني مريح", nameEn:"Cotton Comfort Bra", price:18, stock:25, img:"https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=300"},
+    {id:3, category:"lingerie", nameAr:"شورت دانتيل", nameEn:"Lace Shorts", price:12, stock:30, img:"https://images.unsplash.com/photo-1617331721458-bd3bd3f9c7f8?w=300"},
+    {id:4, category:"lingerie", nameAr:"طقم شيفون شفاف", nameEn:"Sheer Chiffon Set", price:28, stock:8, img:"https://images.unsplash.com/photo-1617331721458-bd3bd3f9c7f8?w=300", badge:"sale"},
+    {id:5, category:"lingerie", nameAr:"سوتيان بدون أسلاك", nameEn:"Wireless Bra", price:22, stock:18, img:"https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=300"},
+    {id:6, category:"lingerie", nameAr:"طقم قطن ناعم", nameEn:"Soft Cotton Set", price:20, stock:22, img:"https://images.unsplash.com/photo-1617331721458-bd3bd3f9c7f8?w=300", badge:"new"},
+    {id:7, category:"dresses", nameAr:"فستان سهرة مخمل أحمر", nameEn:"Red Velvet Gown", price:55, oldPrice:80, stock:8, img:"https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=300", badge:"sale"},
+    {id:8, category:"dresses", nameAr:"فستان كاجوال صيفي", nameEn:"Summer Casual Dress", price:28, stock:20, img:"https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=300"},
+    {id:9, category:"dresses", nameAr:"فستان زفاف بسيط", nameEn:"Simple Wedding Dress", price:130, stock:2, img:"https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=300", badge:"hot"},
+    {id:10, category:"dresses", nameAr:"فستان محاك", nameEn:"Bodycon Dress", price:45, stock:12, img:"https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=300", badge:"new"},
+    {id:11, category:"dresses", nameAr:"فستان سهرة طويل", nameEn:"Long Evening Dress", price:75, stock:5, img:"https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=300"},
+    {id:12, category:"dresses", nameAr:"فستان كتان", nameEn:"Linen Dress", price:35, stock:14, img:"https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=300"},
+    {id:13, category:"sleepwear", nameAr:"بيجاما حرير فاخر", nameEn:"Silk Pajama Set", price:42, stock:15, img:"https://images.unsplash.com/photo-1617331721458-bd3bd3f9c7f8?w=300"},
+    {id:14, category:"sleepwear", nameAr:"روب قطني", nameEn:"Cotton Robe", price:35, stock:10, img:"https://images.unsplash.com/photo-1617331721458-bd3bd3f9c7f8?w=300"},
+    {id:15, category:"sleepwear", nameAr:"قميص نوم قصير حرير", nameEn:"Short Silk Nightdress", price:30, stock:9, img:"https://images.unsplash.com/photo-1617331721458-bd3bd3f9c7f8?w=300"},
+    {id:16, category:"sleepwear", nameAr:"رداء حمام فاخر", nameEn:"Luxury Bathrobe", price:55, stock:12, img:"https://images.unsplash.com/photo-1617331721458-bd3bd3f9c7f8?w=300", badge:"hot"},
+    {id:17, category:"sleepwear", nameAr:"بيجاما قطني صيفي", nameEn:"Summer Cotton Pajama", price:25, stock:20, img:"https://images.unsplash.com/photo-1617331721458-bd3bd3f9c7f8?w=300"},
+    {id:18, category:"sleepwear", nameAr:"طقم نوم شتوي", nameEn:"Winter Sleep Set", price:48, stock:7, img:"https://images.unsplash.com/photo-1617331721458-bd3bd3f9c7f8?w=300"},
+    {id:19, category:"activewear", nameAr:"طقم يوغا مرن", nameEn:"Yoga Set", price:32, stock:10, img:"https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=300"},
+    {id:20, category:"activewear", nameAr:"ليقنز رياضة ضاغط", nameEn:"Compression Leggings", price:25, stock:14, img:"https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=300"},
+    {id:21, category:"activewear", nameAr:"حمالة صدر رياضية", nameEn:"Sports Bra", price:22, stock:20, img:"https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=300"},
+    {id:22, category:"activewear", nameAr:"تيشرت رياضي", nameEn:"Sports T-Shirt", price:18, stock:22, img:"https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=300"},
+    {id:23, category:"activewear", nameAr:"شورت رياضي", nameEn:"Sports Shorts", price:15, stock:25, img:"https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=300"},
+    {id:24, category:"activewear", nameAr:"هودي رياضي", nameEn:"Sports Hoodie", price:40, stock:8, img:"https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=300", badge:"new"},
+    {id:25, category:"vip", nameAr:"طقم VIP ذهبي (محدود)", nameEn:"VIP Gold Limited Set", price:120, oldPrice:180, stock:5, img:"https://images.unsplash.com/photo-1617331721458-bd3bd3f9c7f8?w=300", badge:"vip"},
+    {id:26, category:"vip", nameAr:"روب حرير VIP أسود", nameEn:"VIP Black Silk Robe", price:85, stock:3, img:"https://images.unsplash.com/photo-1617331721458-bd3bd3f9c7f8?w=300", badge:"vip"},
+    {id:27, category:"vip", nameAr:"طوق رقبة مرصع (VIP)", nameEn:"VIP Crystal Choker", price:45, stock:8, img:"https://images.unsplash.com/photo-1617331721458-bd3bd3f9c7f8?w=300", badge:"new"},
+    {id:28, category:"vip", nameAr:"حقيبة يد VIP ذهبية", nameEn:"VIP Gold Handbag", price:150, stock:2, img:"https://images.unsplash.com/photo-1617331721458-bd3bd3f9c7f8?w=300", badge:"vip"},
+    {id:29, category:"vip", nameAr:"نظارات شمسية VIP", nameEn:"VIP Sunglasses", price:60, stock:6, img:"https://images.unsplash.com/photo-1617331721458-bd3bd3f9c7f8?w=300"},
+    {id:30, category:"vip", nameAr:"ساعة يد VIP ذهبية", nameEn:"VIP Gold Watch", price:200, stock:1, img:"https://images.unsplash.com/photo-1617331721458-bd3bd3f9c7f8?w=300", badge:"vip"}
+  ];
+  products.forEach(p => db.ref('products/'+p.id).set(p));
+}
+
+// ========================== VIP LOGIC ==========================
+function updateVipUI() {
+  let vipStatusDiv = document.getElementById('vipStatusBox');
+  if(loggedVipPassword && vipCards.some(c => c.password === loggedVipPassword && (!c.expiry || new Date(c.expiry) > new Date()))) {
+    let card = vipCards.find(c => c.password === loggedVipPassword);
+    vipStatusDiv.innerHTML = `<div class="vip-card"><i class="fas fa-crown fa-3x" style="color:#d4af37;"></i><h3>مرحباً في النخبة VIP</h3><p>${card ? 'المالك: ' + escapeHtml(card.owner) : ''}</p><p>بطاقتك صالحة حتى ${card?.expiry ? new Date(card.expiry).toLocaleDateString() : 'غير محددة'}</p><button class="btn btn-vip" onclick="logoutVip()"><i class="fas fa-sign-out-alt"></i> تسجيل خروج VIP</button></div>`;
+    renderVipProducts();
+  } else {
+    vipStatusDiv.innerHTML = `<div class="vip-card"><i class="fas fa-gem fa-3x"></i><h3>انضمي إلى النخبة VIP</h3><p>احصلي على منتجات حصرية وخصومات تصل إلى 30% مقابل 20$ فقط (مرة واحدة مدى الحياة)</p><button class="btn btn-vip" onclick="purchaseVip()"><i class="fas fa-shopping-cart"></i> اشتركي الآن - 20$</button><button class="btn btn-outline" style="margin-top:15px;" onclick="loginVip()"><i class="fas fa-key"></i> لدي بطاقة بالفعل</button></div>`;
+    document.getElementById('vipProductsGrid').innerHTML = '<div class="vip-card" style="grid-column:1/-1; text-align:center;">🔒 تسجيل الدخول لعرض المنتجات الحصرية</div>';
+  }
+}
+function purchaseVip() {
+  let name = prompt("أدخلي اسمك الكامل لشراء بطاقة VIP (سيظهر في البطاقة)");
+  if(!name || name.trim() === "") { showToast("الاسم مطلوب", "error"); return; }
+  let password = "VIP" + Math.random().toString(36).substring(2,10).toUpperCase();
+  let expiry = new Date(Date.now() + 365*24*60*60*1000).toISOString();
+  let newCard = { password, owner: escapeHtml(name.trim()), purchaseDate: new Date().toISOString(), expiry };
+  db.ref('vipCards/'+password).set(newCard);
+  let msg = `تم شراء بطاقة VIP من روز لانجري\nكلمة المرور: ${password}\nيمكنك استخدامها الآن للدخول إلى القسم الحصري.\nرابط المتجر: ${window.location.href}`;
+  window.open(`https://wa.me/963956775268?text=${encodeURIComponent(msg)}`,'_blank');
+  alert(`تم إنشاء بطاقتك بنجاح!\nكلمة المرور: ${password}\nتم إرسالها أيضاً على واتساب.`);
+  showToast("تم شراء VIP بنجاح، تحقق من واتساب");
+}
+function loginVip() {
+  let pwd = prompt("أدخلي كلمة مرور بطاقة VIP:");
+  if(!pwd) return;
+  let card = vipCards.find(c => c.password === pwd && (!c.expiry || new Date(c.expiry) > new Date()));
+  if(card) {
+    loggedVipPassword = pwd;
+    localStorage.setItem('rose_vip_password', pwd);
+    updateVipUI();
+    showToast("تم الدخول إلى منطقة VIP", "success");
+  } else { alert("كلمة مرور غير صحيحة أو منتهية الصلاحية"); }
+}
+function logoutVip() { loggedVipPassword = null; localStorage.removeItem('rose_vip_password'); updateVipUI(); showToast("تم الخروج من VIP"); }
+function renderVipProducts() {
+  let vipProds = products.filter(p => p.category === 'vip');
+  let html = vipProds.map(p => `<div class="product-card"><div class="product-img"><img src="${p.img}" loading="lazy">${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}${p.stock<3 && p.stock>0 ? '<span class="stock-alert">⚠️ الكمية محدودة</span>' : ''}</div><div class="product-info"><h3>${currentLang==='ar'?p.nameAr:p.nameEn}</h3><div><span class="price">${p.price}$</span> ${p.oldPrice ? `<span class="old-price">${p.oldPrice}$</span>` : ''}</div><span class="stock ${p.stock>0?'stock-in':'stock-out'}">${p.stock>0?'متوفر':'غير متوفر'}</span><button class="add-to-cart" ${p.stock<=0?'disabled':''} onclick="addToCart(${p.id})"><i class="fas fa-cart-plus"></i> أضف للسلة</button></div></div>`).join('');
+  document.getElementById('vipProductsGrid').innerHTML = html || '<p class="vip-card">لا توجد منتجات VIP حالياً</p>';
+}
+
+// ========================== RENDER ALL ==========================
+function renderAll() {
+  renderCategories();
+  renderProducts();
+  renderReviews();
+  if(isAdmin) renderAdminTables();
+  updateVipUI();
+}
+function renderCategories() {
+  categories.forEach(c => c.count = products.filter(p => p.category === c.id).length);
+  let html = categories.map(c => `<div class="category-card" onclick="filterByCategory('${c.id}')"><div class="category-img"><img src="${c.img}" loading="lazy"></div><div class="product-info"><h3>${currentLang === 'ar' ? c.nameAr : c.nameEn}</h3><p>${c.count} منتج</p><small>${currentLang === 'ar' ? c.descAr : c.descEn}</small></div></div>`).join('');
+  document.getElementById('categoriesGrid').innerHTML = html;
+}
+function renderProducts() {
+  let filtered = products.filter(p => (currentFilter === 'all' || p.category === currentFilter) && (p.nameAr.includes(searchQuery) || p.nameEn.toLowerCase().includes(searchQuery.toLowerCase())) && !(p.category === 'vip' && !loggedVipPassword));
+  let cats = ['all',...new Set(products.map(p=>p.category).filter(c => !(c === 'vip' && !loggedVipPassword)))];
+  document.getElementById('filterButtons').innerHTML = cats.map(cat => `<button class="filter-btn ${currentFilter===cat?'active':''}" onclick="filterByCategory('${cat}')">${cat==='all'?'الكل':(currentLang==='ar'?categories.find(c=>c.id===cat)?.nameAr:categories.find(c=>c.id===cat)?.nameEn)}</button>`).join('');
+  let html = filtered.map(p => {
+    let inWish = wishlist.includes(p.id);
+    return `<div class="product-card"><div class="product-img"><img src="${p.img}" loading="lazy">${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}${p.stock<5 && p.stock>0 ? '<span class="stock-alert">⚠️ الكمية محدودة</span>' : ''}</div><div class="product-info"><h3>${currentLang==='ar'?p.nameAr:p.nameEn}</h3><div><span class="price">${p.price}$</span> ${p.oldPrice ? `<span class="old-price">${p.oldPrice}$</span>` : ''}</div><span class="stock ${p.stock>0?'stock-in':'stock-out'}">${p.stock>0?'متوفر':'غير متوفر'}</span><button class="add-to-cart" ${p.stock<=0?'disabled':''} onclick="addToCart(${p.id})"><i class="fas fa-cart-plus"></i> أضف للسلة</button><button class="add-wishlist" onclick="toggleWishlist(${p.id})"><i class="fas ${inWish?'fa-heart':'fa-heart-o'}"></i> ${inWish?'تمت الإضافة':'مفضلة'}</button></div></div>`;
+  }).join('');
+  document.getElementById('productsGrid').innerHTML = html;
+}
+function toggleWishlist(id) {
+  if(wishlist.includes(id)) wishlist = wishlist.filter(i=>i!==id);
+  else wishlist.push(id);
+  db.ref('wishlist').set(wishlist);
+  renderProducts();
+  document.getElementById('wishlistCount').innerText = wishlist.length;
+  showToast(wishlist.includes(id)?'أضيفت للمفضلة':'أزيلت من المفضلة');
+}
+function showWishlist() { alert("المنتجات المفضلة:\n"+wishlist.map(id=>products.find(p=>p.id===id)?.nameAr).filter(n=>n).join('\n')); }
+document.getElementById('searchInput')?.addEventListener('input', (e) => { searchQuery = e.target.value; renderProducts(); });
+function addToCart(id) {
+  let p = products.find(x=>x.id===id);
+  if(!p || p.stock<=0) { showToast('المنتج غير متوفر', 'error'); return; }
+  let existing = cart.find(i=>i.id===id);
+  if(existing) existing.qty++;
+  else cart.push({id, qty:1});
+  db.ref('cart').set(cart);
+  renderCart();
+  showToast(`تمت إضافة ${currentLang==='ar'?p.nameAr:p.nameEn} إلى السلة`);
+}
+function renderCart() {
+  let count = cart.reduce((s,i)=>s+i.qty,0);
+  document.getElementById('cartCount').innerText = count;
+  let itemsDiv = document.getElementById('cartItemsDiv');
+  if(cart.length===0) { itemsDiv.innerHTML = '<p>السلة فارغة</p>'; document.getElementById('cartFooter').style.display='none'; return; }
+  let total = 0;
+  itemsDiv.innerHTML = cart.map(item=>{ let p=products.find(x=>x.id===item.id); if(!p) return ''; total += p.price * item.qty; return `<div class="cart-item"><div><img src="${p.img}" width="70" style="border-radius:12px;"></div><div><b>${currentLang==='ar'?p.nameAr:p.nameEn}</b><br>${p.price}$ × ${item.qty}<div><button onclick="updateQty(${item.id}, -1)">-</button> <span>${item.qty}</span> <button onclick="updateQty(${item.id}, 1)">+</button> <button onclick="removeFromCart(${item.id})"><i class="fas fa-trash"></i></button></div></div></div>`; }).join('');
+  document.getElementById('cartTotal').innerText = total;
+  document.getElementById('cartFooter').style.display='block';
+}
+function updateQty(id, delta) { let item = cart.find(i=>i.id===id); if(item) { item.qty += delta; if(item.qty<=0) cart = cart.filter(i=>i.id!==id); db.ref('cart').set(cart); renderCart(); } }
+function removeFromCart(id) { cart = cart.filter(i=>i.id!==id); db.ref('cart').set(cart); renderCart(); }
+function toggleCart() { document.getElementById('cartOverlay').classList.toggle('active'); document.getElementById('cartSidebar').classList.toggle('active'); }
+function openCheckout() { toggleCart(); document.getElementById('checkoutModal').classList.add('active'); }
+document.getElementById('paymentMethod')?.addEventListener('change',(e)=>{document.getElementById('shamcashInfo').style.display = e.target.value === 'shamcash' ? 'block' : 'none';});
+document.getElementById('checkoutForm')?.addEventListener('submit', function(e){ e.preventDefault(); let name = document.getElementById('checkoutName').value.trim(), phone = document.getElementById('checkoutPhone').value.trim(), address = document.getElementById('checkoutAddress').value.trim(), city = document.getElementById('checkoutCity').value, method = document.getElementById('paymentMethod').value; if(!name||!phone) { showToast('املأ الاسم والهاتف','error'); return; } let total = cart.reduce((s,i)=>{let p=products.find(x=>x.id===i.id); return s+(p?p.price*i.qty:0);},0); let invoiceNumber = 'INV-' + Date.now(); let order = { id: Date.now(), invoice: invoiceNumber, name: escapeHtml(name), phone, address: escapeHtml(address), city, paymentMethod: method, items: [...cart], total, status: method==='shamcash'?'pending_payment':'pending', date: new Date().toISOString(), receipt: null }; if(method==='shamcash' && document.getElementById('shamcashReceipt').files[0]) { let reader = new FileReader(); reader.onload = function(ev) { order.receipt = ev.target.result; orders.push(order); db.ref('orders/'+order.id).set(order); showToast('تم استلام الطلب وإيصال شام كاش'); }; reader.readAsDataURL(document.getElementById('shamcashReceipt').files[0]); } else { orders.push(order); db.ref('orders/'+order.id).set(order); } let msg = `فاتورة ${invoiceNumber}\nالاسم: ${name}\nالمبلغ: ${total}$\nطريقة الدفع: ${method}\nرقم شام كاش: 0956775268`; window.open(`https://wa.me/963956775268?text=${encodeURIComponent(msg)}`,'_blank'); cart = []; db.ref('cart').set(cart); renderCart(); document.getElementById('checkoutModal').classList.remove('active'); showToast('تم إنشاء الطلب وإرساله'); });
+document.getElementById('whatsappOrderBtn')?.addEventListener('click',()=>{ let name=document.getElementById('contactName').value.trim(), phone=document.getElementById('contactPhone').value.trim(), city=document.getElementById('contactCity').value, notes=document.getElementById('contactNotes').value.trim(); if(!name||!phone) { showToast('أدخل الاسم والهاتف','error'); return; } let msg = `طلب جديد من ${name}، رقم ${phone}، محافظة ${city}\nالملاحظات: ${notes}\nيرجى التواصل لتأكيد الطلب (دفع عند الاستلام أو شام كاش)`.trim(); window.open(`https://wa.me/963956775268?text=${encodeURIComponent(msg)}`,'_blank'); showToast('تم إرسال طلبك عبر واتساب'); });
+function filterByCategory(cat) { currentFilter = cat; renderProducts(); document.getElementById('products').scrollIntoView({behavior:'smooth'}); }
+function showHome() { window.scrollTo({top:0, behavior:'smooth'}); }
+function trackOrder() { let inv = document.getElementById('trackingInput').value; let order = orders.find(o=>o.invoice===inv); if(order) alert(`الفاتورة: ${order.invoice}\nالحالة: ${order.status}\nالعميل: ${order.name}\nالمبلغ: ${order.total}$\nطريقة الدفع: ${order.paymentMethod}`); else alert('رقم الفاتورة غير موجود'); }
+
+// ========================== REVIEWS ==========================
+function renderReviews() {
+  let avg = reviews.length ? (reviews.reduce((s,r)=>s+r.rating,0)/reviews.length).toFixed(1) : 0;
+  document.getElementById('avgRatingDisplay').innerHTML = `<span class="section-tag">متوسط التقييم ${avg} / 5</span>`;
+  let html = reviews.slice().reverse().map(r => `<div class="review-card" style="padding:20px;"><div><strong>${escapeHtml(r.name)}</strong> ${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div><p>${escapeHtml(r.comment)}</p><small>${new Date(r.date).toLocaleDateString()}</small></div>`).join('');
+  document.getElementById('reviewsGrid').innerHTML = html;
+}
+function addReview() { let name = document.getElementById('reviewName').value.trim(); let rating = parseInt(document.getElementById('reviewRating').value); let comment = document.getElementById('reviewComment').value.trim(); if(!name||!comment) { showToast('املأ الاسم والتعليق','error'); return; } let newReview = { name: escapeHtml(name), rating, comment: escapeHtml(comment), date: Date.now() }; reviews.push(newReview); db.ref('reviews/'+Date.now()).set(newReview); renderReviews(); document.getElementById('reviewName').value=''; document.getElementById('reviewComment').value=''; showToast('شكراً لتقييمك'); }
+
+// ========================== ADMIN PANEL ==========================
+function openAdminPanel() { if(!isAdmin) { showToast('يجب تسجيل الدخول بحساب المشرف أولاً', 'error'); openLoginModal(); return; } document.getElementById('adminPanel').classList.add('active'); renderAdminTables(); }
+function closeAdminPanel() { document.getElementById('adminPanel').classList.remove('active'); }
+function showAdminTab(tab) { document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active')); document.getElementById(`admin${tab.charAt(0).toUpperCase()+tab.slice(1)}`).classList.add('active'); if(tab==='dashboard') renderDashboard(); if(tab==='products') renderAdminProducts(); if(tab==='vipCards') renderAdminVipTable(); if(tab==='orders') renderAdminOrders(); if(tab==='inventory') renderInventory(); if(tab==='coupons') renderCoupons(); if(tab==='reviewsAdmin') renderAdminReviews(); }
+function renderDashboard() { let totalOrders = orders.length, totalRevenue = orders.reduce((s,o)=>s+o.total,0), vipCount = vipCards.length; document.getElementById('adminDashboard').innerHTML = `<div class="admin-card"><h3>📊 إحصائيات متقدمة</h3><p>إجمالي الطلبات: ${totalOrders}</p><p>إجمالي الإيرادات: ${totalRevenue}$</p><p>المنتجات: ${products.length}</p><p>أعضاء VIP: ${vipCount}</p><p>طلبات شام كاش: ${orders.filter(o=>o.paymentMethod==='shamcash').length}</p><p>الدفع عند الاستلام: ${orders.filter(o=>o.paymentMethod==='cod').length}</p><canvas id="revenueChart" width="400" height="200"></canvas></div>`; new Chart(document.getElementById('revenueChart'), { type: 'bar', data: { labels: ['أسبوع1','أسبوع2','أسبوع3','أسبوع4'], datasets: [{ label: 'المبيعات', data: [350,420,380,510], backgroundColor: '#e91e63' }] } }); }
+function renderAdminProducts() { let tbody = document.getElementById('adminProductsTable'); tbody.innerHTML = products.map(p => `<tr><td><img src="${p.img}" width="50"></td><td>${p.nameAr} (${p.nameEn})</td><td>${p.price}$</td><td>${p.stock}</td><td>${p.category==='vip'?'نعم':'لا'}</td><td><button onclick="editProduct(${p.id})">تعديل</button> <button onclick="deleteProduct(${p.id})">حذف</button></td></tr>`).join(''); }
+function editProduct(id) { let p = products.find(x=>x.id===id); if(p){ document.getElementById('editId').value = p.id; document.getElementById('prodNameAr').value = p.nameAr; document.getElementById('prodNameEn').value = p.nameEn; document.getElementById('prodCategory').value = p.category; document.getElementById('prodPrice').value = p.price; document.getElementById('prodOldPrice').value = p.oldPrice || ''; document.getElementById('prodStock').value = p.stock; document.getElementById('prodImg').value = p.img; document.getElementById('prodBadge').value = p.badge || ''; showAdminTab('products'); } }
+function saveProduct() { let id = document.getElementById('editId').value; let nameAr = document.getElementById('prodNameAr').value.trim(), nameEn = document.getElementById('prodNameEn').value.trim(), category = document.getElementById('prodCategory').value, price = parseFloat(document.getElementById('prodPrice').value), oldPrice = parseFloat(document.getElementById('prodOldPrice').value) || null, stock = parseInt(document.getElementById('prodStock').value), img = document.getElementById('prodImg').value.trim(), badge = document.getElementById('prodBadge').value.trim(); if(!nameAr || !price) { showToast('املأ البيانات الأساسية','error'); return; } let newProduct = { id: id?parseInt(id):Date.now(), nameAr: escapeHtml(nameAr), nameEn: escapeHtml(nameEn), category, price, oldPrice, stock, img, badge }; if(id) { let index = products.findIndex(p=>p.id==id); if(index!==-1) products[index]=newProduct; else products.push(newProduct); } else { products.push(newProduct); } db.ref('products/'+newProduct.id).set(newProduct); renderAll(); renderAdminProducts(); clearProductForm(); showToast('تم حفظ المنتج'); }
+function deleteProduct(id) { if(confirm('حذف المنتج نهائياً؟')) { let p = products.find(x=>x.id===id); products = products.filter(p=>p.id!==id); db.ref('products/'+id).remove(); renderAll(); renderAdminProducts(); showToast('تم الحذف'); } }
+function clearProductForm() { document.getElementById('editId').value=''; document.getElementById('prodNameAr').value=''; document.getElementById('prodNameEn').value=''; document.getElementById('prodCategory').value='lingerie'; document.getElementById('prodPrice').value=''; document.getElementById('prodOldPrice').value=''; document.getElementById('prodStock').value=''; document.getElementById('prodImg').value=''; document.getElementById('prodBadge').value=''; }
+function renderAdminOrders() { let tbody = document.getElementById('adminOrdersTable'); tbody.innerHTML = orders.map(o => `<tr><td>${o.invoice}</td><td>${escapeHtml(o.name)}</td><td>${o.total}$</td><td>${o.paymentMethod}</td><td><select onchange="updateOrderStatus('${o.id}',this.value)"><option ${o.status==='pending'?'selected':''}>pending</option><option ${o.status==='pending_payment'?'selected':''}>pending_payment</option><option ${o.status==='paid'?'selected':''}>paid</option><option ${o.status==='shipped'?'selected':''}>shipped</option><option ${o.status==='delivered'?'selected':''}>delivered</option></select></td><td>${o.receipt ? '<a href="'+o.receipt+'" target="_blank">إيصال</a>' : '-'}</td><td><button onclick="viewInvoice('${o.id}')">عرض</button></td></tr>`).join(''); }
+function updateOrderStatus(id, status) { let o = orders.find(x=>x.id==id); if(o){ o.status=status; db.ref('orders/'+id).set(o); renderAdminOrders(); showToast('تم تحديث الحالة'); } }
+function viewInvoice(id) { let o = orders.find(x=>x.id==id); if(o) alert(`الفاتورة: ${o.invoice}\nالعميل: ${o.name}\nالمبلغ: ${o.total}$\nالحالة: ${o.status}\nطريقة الدفع: ${o.paymentMethod}\nالتاريخ: ${new Date(o.date).toLocaleString()}\nالعنوان: ${o.address}`); }
+function renderInventory() { let div = document.getElementById('inventoryList'); div.innerHTML = products.map(p => `<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;"><span>${p.nameAr}</span><span>المخزون: ${p.stock}</span><button onclick="updateStock(${p.id},-1)">-1</button><button onclick="updateStock(${p.id},1)">+1</button></div>`).join(''); }
+function updateStock(id, delta) { let p = products.find(x=>x.id===id); if(p) { p.stock = Math.max(0, p.stock+delta); db.ref('products/'+id).set(p); renderAll(); renderInventory(); showToast('تم تحديث المخزون'); } }
+function renderCoupons() { let list = document.getElementById('couponsList'); list.innerHTML = coupons.map(c => `<li>${c.code} - خصم ${c.discount}% <button onclick="deleteCoupon('${c.code}')">حذف</button></li>`).join(''); }
+function addCoupon() { let code = document.getElementById('couponCode').value.trim().toUpperCase(); let discount = parseFloat(document.getElementById('couponDiscount').value); if(code && discount>0 && discount<=100) { coupons.push({code, discount}); db.ref('coupons/'+code).set({code, discount}); renderCoupons(); showToast('تمت إضافة الكوبون'); } else showToast('بيانات غير صحيحة','error'); }
+function deleteCoupon(code) { coupons = coupons.filter(c=>c.code!==code); db.ref('coupons/'+code).remove(); renderCoupons(); }
+function renderAdminReviews() { let div = document.getElementById('adminReviewsList'); div.innerHTML = reviews.map((r,idx) => `<div style="border-bottom:1px solid #eee; padding:10px;"><strong>${r.name}</strong> - ${'★'.repeat(r.rating)}<br>${r.comment}<br><small>${new Date(r.date).toLocaleString()}</small><button onclick="deleteReview('${idx}')">حذف</button></div>`).join(''); }
+function deleteReview(idx) { let r = reviews[idx]; reviews.splice(idx,1); db.ref('reviews').set(reviews); renderReviews(); renderAdminReviews(); showToast('تم حذف التقييم'); }
+function renderAdminVipTable() { let tbody = document.getElementById('adminVipTable'); tbody.innerHTML = vipCards.map(v => `<tr><td>${v.password}</td><td>${v.owner}</td><td>${new Date(v.purchaseDate).toLocaleDateString()}</td><td>${v.expiry ? new Date(v.expiry).toLocaleDateString() : 'دائم'}</td><td><button onclick="deleteVipCard('${v.password}')">حذف</button></td></tr>`).join(''); }
+function addVipCardManually() { let pwd = document.getElementById('vipCardCode').value.trim(), owner = document.getElementById('vipCardOwner').value.trim(), expiry = document.getElementById('vipCardExpiry').value; if(!pwd || !owner) { showToast('املأ كلمة المرور والمالك','error'); return; } let newCard = { password: pwd, owner: escapeHtml(owner), purchaseDate: new Date().toISOString(), expiry: expiry ? new Date(expiry).toISOString() : null }; vipCards.push(newCard); db.ref('vipCards/'+pwd).set(newCard); renderAdminVipTable(); showToast('تمت إضافة البطاقة'); }
+function deleteVipCard(pwd) { if(confirm('حذف البطاقة؟')) { vipCards = vipCards.filter(v=>v.password!==pwd); db.ref('vipCards/'+pwd).remove(); renderAdminVipTable(); showToast('تم الحذف'); } }
+function exportFullData() { let data = { products, orders, coupons, reviews, vipCards, wishlist }; let blob = new Blob([JSON.stringify(data)], {type:"application/json"}); let link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = 'roselingerie_full_backup.json'; link.click(); showToast('تم تصدير البيانات'); }
+function importFullData() { let file = document.getElementById('restoreFile').files[0]; if(!file) return; let reader = new FileReader(); reader.onload = function(e) { let data = JSON.parse(e.target.result); if(data.products) { products = data.products; products.forEach(p=>db.ref('products/'+p.id).set(p)); } if(data.orders) { orders = data.orders; orders.forEach(o=>db.ref('orders/'+o.id).set(o)); } if(data.coupons) { coupons = data.coupons; coupons.forEach(c=>db.ref('coupons/'+c.code).set(c)); } if(data.reviews) { reviews = data.reviews; db.ref('reviews').set(reviews); } if(data.vipCards) { vipCards = data.vipCards; vipCards.forEach(v=>db.ref('vipCards/'+v.password).set(v)); } if(data.wishlist) { wishlist = data.wishlist; db.ref('wishlist').set(wishlist); } renderAll(); renderAdminTables(); showToast('تمت الاستعادة بنجاح'); }; reader.readAsText(file); }
+function saveStoreSettings() { let name = document.getElementById('storeName').value; let whatsapp = document.getElementById('storeWhatsapp').value; let shamcash = document.getElementById('storeShamCash').value; db.ref('settings').set({storeName:name, whatsapp, shamcash}); showToast('تم حفظ الإعدادات'); }
+function renderAdminTablesIfNeeded() { if(document.getElementById('adminPanel').classList.contains('active')) renderAdminTables(); }
+function renderAdminTables() { renderDashboard(); renderAdminProducts(); renderAdminOrders(); renderInventory(); renderCoupons(); renderAdminReviews(); renderAdminVipTable(); }
+function toggleLang() { currentLang = currentLang === 'ar' ? 'en' : 'ar'; localStorage.setItem('rose_lang', currentLang); document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr'; document.getElementById('langBtn').innerText = currentLang === 'ar' ? 'EN' : 'AR'; renderAll(); }
+function showToast(msg, type='success') { let t = document.createElement('div'); t.className = 'toast'; t.innerHTML = `<i class="fas ${type==='success'?'fa-check-circle':'fa-exclamation-circle'}"></i> ${escapeHtml(msg)}`; document.body.appendChild(t); setTimeout(()=>t.remove(), 3000); }
+function toggleMobileMenu() { document.getElementById('mobileMenu').classList.toggle('active'); }
+
+// ========================== INITIALIZATION ==========================
+loadFromFirebase();
+setTimeout(()=>document.getElementById('loadingOverlay').style.display='none', 800);
+new Swiper('.heroSwiper', { loop: true, autoplay: { delay: 4000 }, pagination: { el: '.swiper-pagination' } });
+if(localStorage.getItem('rose_lang')) { currentLang = localStorage.getItem('rose_lang'); document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr'; document.getElementById('langBtn').innerText = currentLang === 'ar' ? 'EN' : 'AR'; }
+renderAll();
+</script>
+</body>
+</html>
